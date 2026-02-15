@@ -233,7 +233,6 @@
       <div class="hint">微信： collectiondemaman</div>
     </div>
     <input id="q" type="search" placeholder="搜索…（水台 / Creil / 物品名）" />
-    <div class="pill" id="count"></div>
   </div>
 </header>
 
@@ -250,7 +249,6 @@ const TAGS = [{"name": "家具", "count": 86}, {"name": "国现专区", "count":
 const grid = document.getElementById('grid');
 const q = document.getElementById('q');
 const empty = document.getElementById('empty');
-const count = document.getElementById('count');
 const tagsBar = document.getElementById('tags');
 
 // ✅ 单选：空字符串表示“全部”
@@ -306,7 +304,6 @@ function render(list) {
 
   list.forEach(it => grid.appendChild(card(it)));
   empty.style.display = list.length ? 'none' : 'block';
-  count.textContent = `${list.length} 件`;
 }
 
 function getQueryParam(name) {
