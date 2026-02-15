@@ -134,23 +134,29 @@
 
   /* 标签条（单选） */
   .tags{
-    display:flex;
-    gap:8px;
-    overflow:auto;
-    padding-bottom:6px;
-    margin-top:10px;
-  }
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding-bottom:6px;
+  margin-top:10px;
+
+  position: sticky;
+  top: 56px;   /* 如果挡住了就改成 60 或 64 */
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 9;
+  padding-top: 6px;
+}
 
   /* 手机版：改成多行（2行或3行由JS设置），不再横向滚动 */
-  @media (max-width: 768px){
-    .tags{
-      flex-wrap: wrap;
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding-bottom: 10px;
-      max-height: calc(var(--tagRows, 2) * var(--tagRowH, 36px));
-    }
+@media (max-width: 768px){
+  .tags{
+    flex-wrap: wrap;
+    overflow: visible;      /* 不要滚动容器 */
+    max-height: none;       /* 不限高，全部显示 */
+    padding-bottom: 10px;
   }
+}
 
   .tagbtn {
     border:1px solid var(--border);
@@ -260,7 +266,7 @@
       </div>
 
       <div class="kv">
-        <div class="k">标签</div><div>杂货</div>
+        <div class="k">标签</div><div>中古器物</div>
       </div>
 
       <div class="desc">法国中古木质衣领熨烫架
