@@ -141,15 +141,14 @@
   }
 
   /* 手机版：改成多行（2行或3行由JS设置），不再横向滚动 */
-  @media (max-width: 768px){
-    .tags{
-      flex-wrap: wrap;
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding-bottom: 10px;
-      max-height: calc(var(--tagRows, 2) * var(--tagRowH, 36px));
-    }
+@media (max-width: 768px){
+  .tags{
+    flex-wrap: wrap;
+    overflow: visible;      /* 不要滚动容器 */
+    max-height: none;       /* 不限高，全部显示 */
+    padding-bottom: 10px;
   }
+}
 
   .tagbtn {
     border:1px solid var(--border);
@@ -364,14 +363,6 @@ function buildTags() {
 
   syncTagActive();
 
-  // 手机端：根据分类数量决定显示 2 行或 3 行（只运行一次）
-  const totalBtns = 1 + TAGS.length; // “全部” + 标签数
-  const rows = (totalBtns <= 10) ? 2 : 3; // 阈值可改
-
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    tagsBar.style.setProperty("--tagRows", rows);
-    tagsBar.style.setProperty("--tagRowH", "36px");
-  }
 }
 
 function filter() {
