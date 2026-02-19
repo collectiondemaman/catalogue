@@ -202,10 +202,22 @@ function buildTags(){
 }
 
 let tmr=null;
-q.addEventListener('input', ()=>{ clearTimeout(tmr); tmr=setTimeout(filter, 120); });
+q.addEventListener('input', ()=>{ 
+  clearTimeout(tmr); 
+  tmr=setTimeout(filter, 120); 
+});
 
 buildTags();
+
+// ✅ 支持从详情页带 ?q=xxx 回到目录自动搜索
+const params = new URLSearchParams(location.search);
+const initQ = params.get('q');
+if (initQ) {
+  q.value = initQ;
+}
+
 filter();
+
 </script>
 
 </body>
