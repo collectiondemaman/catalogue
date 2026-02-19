@@ -6,176 +6,47 @@
 <title>法国中古白瓷浮雕圣水台
 品相不错无磕碰裂纹</title>
 <style>
-  :root {
-    --bg:#fff; --text:#111; --muted:#666; --border:#eee;
-    --radius:16px;
-  }
-  body {
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
-  }
+  :root { --bg:#fff; --text:#111; --muted:#666; --border:#eee; --radius:16px; --header-h:56px; }
+  *{ box-sizing:border-box; } html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif; }
   a{ color:inherit; text-decoration:none; }
+  header{ position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); z-index:10; }
+  .bar{ max-width:980px; margin:0 auto; padding:10px 12px; display:flex; gap:10px; align-items:center; }
+  .brand{ font-weight:900; letter-spacing:.2px; font-size:16px; } .hint{ color:var(--muted); font-size:12px; }
+  input[type="search"]{ flex:1; border:1px solid var(--border); border-radius:999px; padding:10px 12px; font-size:14px; outline:none; }
+  .pill{ border:1px solid var(--border); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted); white-space:nowrap; }
+  .wrap{ max-width:980px; margin:0 auto; padding:12px 12px 56px; }
 
-  header {
-    position: sticky; top:0;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom:1px solid var(--border);
-    z-index:10;
-  }
-  .bar {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 10px 12px;
-    display:flex;
-    gap:10px;
-    align-items:center;
-  }
-  .brand { font-weight:900; letter-spacing:.2px; font-size:16px; }
-  .hint { color:var(--muted); font-size:12px; }
-  input[type="search"] {
-    flex:1;
-    border:1px solid var(--border);
-    border-radius:999px;
-    padding:10px 12px;
-    font-size:14px;
-    outline:none;
-  }
-  .pill {
-    border:1px solid var(--border);
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:12px;
-    color:var(--muted);
-    white-space:nowrap;
+  .grid{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .grid .card{ width:calc((100% - 10px) / 2); }
+  @media (max-width:320px){ .grid .card{ width:100%; } }
+
+  @supports (display:grid){
+    .grid{ display:grid; gap:10px; margin-top:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .grid .card{ width:auto; }
+    @media (max-width:320px){ .grid{ grid-template-columns:1fr; } }
+    @media (min-width:768px){ .grid{ grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); } }
   }
 
-  .wrap {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 12px 12px 56px;
-  }
-
-  /* 自适应网格：手机优先 */
-  .grid{
-    display:grid;
-    gap: 10px;
-    margin-top: 12px;
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 默认：手机两列 */
-  }
-
-  /* 很小屏：一列 */
-  @media (max-width: 360px){
-    .grid{ grid-template-columns: 1fr; }
-  }
-
-  /* 平板/电脑：自适应多列（根据宽度自动 3/4/5 列） */
-  @media (min-width: 768px){
-    .grid{
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    }
-  }
-
-  .card {
-    position: relative;
-    border:1px solid var(--border);
-    border-radius: var(--radius);
-    overflow:hidden;
-    background:#fff;
-    box-shadow: 0 8px 24px rgba(0,0,0,.04);
-  }
-
-  .img {
-    display:block;
-    aspect-ratio: 4/3;
-    background:#f3f3f3;
-  }
-  .img img { width:100%; height:100%; object-fit:cover; display:block; }
-
-  .meta { padding: 10px 10px 12px; }
-  /* 首页标题两行省略 */
-  .t {
-    font-size: 14px;
-    line-height: 1.35;
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-    min-height: 2.7em;
-    white-space: pre-wrap;
-  }
-  .row { display:flex; justify-content:space-between; gap:10px; margin-top:8px; align-items:baseline; }
+  .card{ border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.04); }
+  .img{ display:block; aspect-ratio:4/3; background:#f3f3f3; }
+  .img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .meta{ padding:10px 10px 12px; }
+  .t{ font-size:14px; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:2.7em; white-space:pre-wrap; }
+  .row{ display:flex; justify-content:space-between; gap:10px; margin-top:8px; align-items:baseline; }
   .p{ font-weight:900; color:#ff6a00; }
-  .small { color:var(--muted); font-size:12px; }
-  .pid{
-    color:#aaa;
-    font-size:11px;
-    margin-top:6px;
-    text-align:right;
-    letter-spacing:.3px;
-  }
+  .pid{ color:#aaa; font-size:11px; margin-top:6px; text-align:right; letter-spacing:.3px; }
 
-  /* 标签条（单选） */
-  .tags{
-    display:flex;
-    gap:8px;
-    overflow:auto;
-    padding-bottom:6px;
-    margin-top:10px;
+  .tags{ display:flex; gap:8px; overflow:auto; padding-bottom:6px; margin-top:10px;
+    position:sticky; top:var(--header-h); background:rgba(255,255,255,.95); backdrop-filter:blur(8px); z-index:9; padding-top:6px; }
+  @media (max-width:768px){ .tags{ flex-wrap:wrap; overflow:visible; padding-bottom:10px; } }
+  .tagbtn{ border:1px solid var(--border); border-radius:999px; padding:7px 10px; font-size:12px; color:var(--muted); white-space:nowrap; background:#fff; cursor:pointer; user-select:none; }
+  .tagbtn.active{ color:#111; border-color:#ccc; font-weight:800; }
 
-    position: sticky;
-    top: 56px;
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(8px);
-    z-index: 9;
-    padding-top: 6px;
-  }
-  /* 手机版：改成多行（2行或3行由JS设置），不再横向滚动 */
-  @media (max-width: 768px){
-    .tags{
-      flex-wrap: wrap;
-      overflow: visible;
-      max-height: none;
-      padding-bottom: 10px;
-    }
-  }
-
-  .tagbtn {
-    border:1px solid var(--border);
-    border-radius:999px;
-    padding: 7px 10px;
-    font-size:12px;
-    color: var(--muted);
-    white-space:nowrap;
-    background:#fff;
-    cursor:pointer;
-    user-select:none;
-  }
-  .tagbtn.active {
-    color:#111;
-    border-color:#ccc;
-    font-weight:800;
-  }
-
-  /* 仅 sold.html 使用：灰度卡片 */
-  .sold .img img { filter: grayscale(1); opacity: .72; }
-  .sold .p { color:#999; }
-  details { margin-top:10px; }
-  summary { cursor:pointer; color:var(--muted); font-size:12px; }
-    /* 详情页图片：限制宽度，避免超大 */
-  .allimgs { margin-top: 12px; }
-  .oneimg { margin: 10px 0; }
-  .oneimg img {
-    width: 100%;
-    max-width: 980px;
-    height: auto;
-    display: block;
-  }
-  .desc{
-  white-space: pre-wrap;
-  line-height: 1.5;
-  font-size: 14px;
-}
+  .allimgs{ margin-top:12px; } .oneimg{ margin:10px 0; }
+  .oneimg img{ width:100%; max-width:980px; height:auto; display:block; }
+  .desc{ white-space:pre-wrap; line-height:1.5; font-size:14px; }
 </style>
 </head>
 <body>
@@ -192,28 +63,11 @@
     <div class="panel">
       <div class="h1">法国中古白瓷浮雕圣水台
 品相不错无磕碰裂纹</div>
-
-      <!-- 产品ID + 复制 -->
       <div style="margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-        <div class="small">产品ID：<span id="pid_text">832541335071</span></div>
-        <button id="copyBtn" style="
-            border:1px solid #eee;
-            border-radius:999px;
-            padding:4px 10px;
-            font-size:12px;
-            background:#fff;
-            cursor:pointer;
-        ">复制</button>
+        <div class="hint">产品ID：<span id="pid_text">832541335071</span></div>
+        <button id="copyBtn" style="border:1px solid #eee;border-radius:999px;padding:4px 10px;font-size:12px;background:#fff;cursor:pointer;">复制</button>
       </div>
-
-      <div class="row" style="margin-top:8px;">
-        <div class="p">2300 ¥</div>
-      </div>
-
-      <div class="kv">
-        <div class="k">标签</div><div>水台</div>
-      </div>
-
+      <div class="row" style="margin-top:8px;"><div class="p">2300 ¥</div></div>
       <div class="desc">法国中古白瓷浮雕圣水台
 品相不错无磕碰裂纹
 水龙头已经无法使用，已经堵死不漏水，可以正常盛水
@@ -229,41 +83,31 @@
 中古家具｜法式家具｜法式乡村风｜法式瓷器｜中古瓷器｜古董瓷器｜法国古董｜中古餐具｜
 法式乡村风｜法式中古</div>
     </div>
-
-    <div class="allimgs">
-      <div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-01.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-02.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-03.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-04.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-05.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-06.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-07.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-08.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" src="../图片夹/832541335071-09.jpg" alt=""></div>
-    </div>
+    <div class="allimgs"><div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-01.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-02.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-03.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-04.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-05.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-06.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-07.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-08.jpg" alt=""></div>
+<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/832541335071-09.jpg" alt=""></div></div>
   </div>
 </div>
 
 <script>
 const copyBtn = document.getElementById('copyBtn');
-if (copyBtn) {
-  copyBtn.addEventListener('click', () => {
-    const text = document.getElementById('pid_text').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      copyBtn.innerText = "已复制";
-      setTimeout(() => {
-        copyBtn.innerText = "复制";
-      }, 1500);
-    });
+copyBtn?.addEventListener('click', ()=>{
+  const text = document.getElementById('pid_text').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    copyBtn.innerText="已复制";
+    setTimeout(()=>copyBtn.innerText="复制", 1500);
   });
-}
-
-const input = document.getElementById('q');
-input.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    const v = (input.value || '').trim();
-    const url = v ? `../index.html?q=${encodeURIComponent(v)}` : '../index.html';
-    window.location.href = url;
+});
+document.getElementById('q').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){
+    const v=(e.target.value||'').trim();
+    location.href = v ? `../index.html?q=${encodeURIComponent(v)}` : '../index.html';
   }
 });
 </script>
