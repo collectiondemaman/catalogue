@@ -52,7 +52,7 @@
 <body>
 <header>
   <div class="bar">
-    <a class="back" href="../index.html">返回</a>
+    <a class="back" id="backLink" href="../index.html">返回</a>
     <input id="q" type="search" placeholder="搜索…（回到目录）" />
     <div class="pill">在售</div>
   </div>
@@ -87,6 +87,25 @@ Carron paris Marie-Antoinette 系列，取名自 18 世纪法国王后玛丽·�
 </div>
 
 <script>
+const params = new URLSearchParams(location.search);
+const curTag = (params.get('tag') || '').trim();
+const curQ = (params.get('q') || '').trim();
+
+// ✅ 返回：带回 tag/q
+const backLink = document.getElementById('backLink');
+if (backLink && (curTag || curQ)) {
+  const p = new URLSearchParams();
+  if (curTag) p.set('tag', curTag);
+  if (curQ) p.set('q', curQ);
+  backLink.href = `../index.html?${p.toString()}`;
+}
+
+// ✅ 如果详情页是带 q 进来的，把输入框也填上（可见的“保持状态”）
+if (curQ) {
+  const qInput = document.getElementById('q');
+  if (qInput) qInput.value = curQ;
+}
+
 const copyBtn = document.getElementById('copyBtn');
 copyBtn?.addEventListener('click', ()=>{
   const text = document.getElementById('pid_text').innerText;
@@ -95,10 +114,16 @@ copyBtn?.addEventListener('click', ()=>{
     setTimeout(()=>copyBtn.innerText="复制", 1500);
   });
 });
+
+// ✅ 回车搜索：带上 tag（如果有）
 document.getElementById('q').addEventListener('keydown', (e)=>{
   if(e.key==='Enter'){
     const v=(e.target.value||'').trim();
-    location.href = v ? `../index.html?q=${encodeURIComponent(v)}` : '../index.html';
+    const p = new URLSearchParams();
+    if (curTag) p.set('tag', curTag);
+    if (v) p.set('q', v);
+    const qs = p.toString();
+    location.href = qs ? `../index.html?${qs}` : '../index.html';
   }
 });
 </script>

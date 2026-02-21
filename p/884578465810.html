@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>【国现】法国中古家具vintage洛林椅
+<title>【国现特价】法国中古洛林椅
 尺寸35.5*30.5cm</title>
 <style>
   :root { --bg:#fff; --text:#111; --muted:#666; --border:#eee; --radius:16px; --header-h:56px; }
@@ -52,7 +52,7 @@
 <body>
 <header>
   <div class="bar">
-    <a class="back" href="../index.html">返回</a>
+    <a class="back" id="backLink" href="../index.html">返回</a>
     <input id="q" type="search" placeholder="搜索…（回到目录）" />
     <div class="pill">在售</div>
   </div>
@@ -61,32 +61,28 @@
 <div class="wrap">
   <div class="detail">
     <div class="panel">
-      <div class="h1">【国现】法国中古家具vintage洛林椅
+      <div class="h1">【国现特价】法国中古洛林椅
 尺寸35.5*30.5cm</div>
       <div style="margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
         <div class="hint">产品ID：<span id="pid_text">884578465810</span></div>
         <button id="copyBtn" style="border:1px solid #eee;border-radius:999px;padding:4px 10px;font-size:12px;background:#fff;cursor:pointer;">复制</button>
       </div>
-      <div class="row" style="margin-top:8px;"><div class="p">1900 ¥</div></div>
-      <div class="desc">【国现】法国中古家具vintage洛林椅
+      <div class="row" style="margin-top:8px;"><div class="p">1750 ¥</div></div>
+      <div class="desc">【国现特价】法国中古洛林椅
 尺寸35.5
 
 30.5cm
 高度：92cm 
 
 
-
-1900￥ 一张，运费顺丰到付
-
+1750￥ 一张，运费顺丰到付
 
 
 由于中古器物稀有性和特殊性，下单请建议先咨询是否宝贝还在
 
 
 
-细致打包，破损包赔，中古/古董物品经不起折腾，一经售出不退不换，感谢理解
-
-中古家具｜法式家具｜法式乡村风｜中古瓷器｜古董瓷器｜法国古董｜中古餐具｜法式乡村风｜法式中古｜西洋古董｜西洋瓷器｜</div>
+细致打包，破损包赔，中古/古董物品经不起折腾，一经售出不退不换，感谢理解</div>
     </div>
     <div class="allimgs"><div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/884578465810-01.jpg" alt=""></div>
 <div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/884578465810-02.jpg" alt=""></div>
@@ -98,6 +94,25 @@
 </div>
 
 <script>
+const params = new URLSearchParams(location.search);
+const curTag = (params.get('tag') || '').trim();
+const curQ = (params.get('q') || '').trim();
+
+// ✅ 返回：带回 tag/q
+const backLink = document.getElementById('backLink');
+if (backLink && (curTag || curQ)) {
+  const p = new URLSearchParams();
+  if (curTag) p.set('tag', curTag);
+  if (curQ) p.set('q', curQ);
+  backLink.href = `../index.html?${p.toString()}`;
+}
+
+// ✅ 如果详情页是带 q 进来的，把输入框也填上（可见的“保持状态”）
+if (curQ) {
+  const qInput = document.getElementById('q');
+  if (qInput) qInput.value = curQ;
+}
+
 const copyBtn = document.getElementById('copyBtn');
 copyBtn?.addEventListener('click', ()=>{
   const text = document.getElementById('pid_text').innerText;
@@ -106,10 +121,16 @@ copyBtn?.addEventListener('click', ()=>{
     setTimeout(()=>copyBtn.innerText="复制", 1500);
   });
 });
+
+// ✅ 回车搜索：带上 tag（如果有）
 document.getElementById('q').addEventListener('keydown', (e)=>{
   if(e.key==='Enter'){
     const v=(e.target.value||'').trim();
-    location.href = v ? `../index.html?q=${encodeURIComponent(v)}` : '../index.html';
+    const p = new URLSearchParams();
+    if (curTag) p.set('tag', curTag);
+    if (v) p.set('q', v);
+    const qs = p.toString();
+    location.href = qs ? `../index.html?${qs}` : '../index.html';
   }
 });
 </script>
