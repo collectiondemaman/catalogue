@@ -94,7 +94,6 @@ const params = new URLSearchParams(location.search);
 const curTag = (params.get('tag') || '').trim();
 const curQ = (params.get('q') || '').trim();
 
-// ✅ 返回：带回 tag/q
 const backLink = document.getElementById('backLink');
 if (backLink && (curTag || curQ)) {
   const p = new URLSearchParams();
@@ -103,7 +102,6 @@ if (backLink && (curTag || curQ)) {
   backLink.href = `../index.html?${p.toString()}`;
 }
 
-// ✅ 如果详情页是带 q 进来的，把输入框也填上（可见的“保持状态”）
 if (curQ) {
   const qInput = document.getElementById('q');
   if (qInput) qInput.value = curQ;
@@ -118,7 +116,6 @@ copyBtn?.addEventListener('click', ()=>{
   });
 });
 
-// ✅ 回车搜索：带上 tag（如果有）
 document.getElementById('q').addEventListener('keydown', (e)=>{
   if(e.key==='Enter'){
     const v=(e.target.value||'').trim();
