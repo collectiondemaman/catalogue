@@ -130,13 +130,10 @@ function thumbUrl(fn){ return fn ? ('thumb/' + encodeURIComponent(fn)) : ''; }
 
 function buildQS() {
   const params = new URLSearchParams();
-
   const t = (selectedTag || '').trim();
   const qq = (q && q.value ? String(q.value).trim() : '');
-
   if (t) params.set('tag', t);   // 不要手动 encodeURIComponent
   if (qq) params.set('q', qq);   // 不要手动 encodeURIComponent
-
   const s = params.toString();   // 自动把中文编码成 %E5...
   return s ? ('?' + s) : '';
 }
