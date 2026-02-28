@@ -135,16 +135,42 @@ function buildQS(){
   if (s) arr.push('q=' + encodeURIComponent(s));
   return arr.length ? ('?' + arr.join('&')) : '';
 }
-function updateUrl(){
+function buildQS() {
+  const params = new URLSearchParams();
+
+  // 你的变量名可能不同：selectedTag / q.value
+  const t = (selectedTag || '').trim();
+  const qq = (q?.value || '').trim();
+
+  if (t) params.set('tag', t);   // 不要手动 encodeURIComponent
+  if (qq) params.set('q', qq);   // 不要手动 encodeURIComponent
+
+  const s = params.toString();   // 这里会自动把中文编码成 %E5...
+  return s ? ('?' + s) : '';
+}
+
+function updateUrl() {
   const qs = buildQS();
   history.replaceState(null, '', qs ? (location.pathname + qs) : location.pathname);
 }
-function initFromUrl(){
+
+function initFromUrl() {
   const params = new URLSearchParams(location.search);
-  const t = (params.get('tag') || '').trim();
-  const qq = (params.get('q') || '').trim();
+
+  // URLSearchParams.get() 读出来通常已经是“解码后的中文”
+  // 但如果你旧版本曾经手动 encode 过，可能会出现残留的 %E5...，这里做一次兜底解码
+  const safeDecode = (s) => {
+    try { return decodeURIComponent(s); } catch { return s; }
+  };
+
+  const tRaw = (params.get('tag') || '').trim();
+  const qRaw = (params.get('q') || '').trim();
+
+  const t = safeDecode(tRaw);
+  const qq = safeDecode(qRaw);
+
   if (t) selectedTag = t;
-  if (qq) q.value = qq;
+  if (qq && q) q.value = qq;
 }
 
 function card(it) {
