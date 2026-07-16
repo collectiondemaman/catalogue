@@ -56,7 +56,7 @@
 <body>
 <header>
   <div class="bar">
-    <a class="back" id="backLink" href="../index.html">Back</a>
+    <a class="back" id="backLink" href="/en/">Back</a>
     <input id="q" type="search" placeholder="Search catalogue" />
     <div class="pill">Available</div>
   </div>
@@ -107,7 +107,7 @@ if (backLink && (curTag || curQ)) {
   const p = new URLSearchParams();
   if (curTag) p.set('tag', curTag);
   if (curQ) p.set('q', curQ);
-  backLink.href = `../index.html?${p.toString()}`;
+  backLink.href = `/en/?${p.toString()}`;
 }
 
 if (curQ) {
@@ -131,7 +131,7 @@ document.getElementById('q').addEventListener('keydown', (e)=>{
     if (curTag) p.set('tag', curTag);
     if (v) p.set('q', v);
     const qs = p.toString();
-    location.href = qs ? `../index.html?${qs}` : '../index.html';
+    location.href = qs ? `/en/?${qs}` : '/en/';
   }
 });
 </script>
