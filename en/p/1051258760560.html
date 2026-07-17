@@ -58,6 +58,12 @@
   .contact-box{ margin:18px 0 20px; padding:20px; border:1px solid #eee5da; border-radius:14px; background:linear-gradient(135deg,#fffaf4,#fff); box-shadow:0 10px 28px rgba(0,0,0,.05); }
   .contact-box h2{ margin:0 0 8px; font-size:18px; }
   .contact-box p{ margin:0 0 14px; color:#444; line-height:1.55; font-size:14px; }
+  .enquiry-copy{ margin:14px 0; }
+  .enquiry-label{ display:block; margin-bottom:6px; color:#555; font-size:12px; font-weight:700; }
+  .enquiry-row{ display:grid; grid-template-columns:minmax(0,1fr) auto; border:1px solid #ded7cf; border-radius:10px; overflow:hidden; background:#fff; }
+  .enquiry-value{ min-width:0; padding:12px 13px; color:#333; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .enquiry-copy-btn{ border:0; border-left:1px solid #ded7cf; padding:0 16px; background:#fff; cursor:pointer; font-weight:750; font-size:13px; }
+  .enquiry-copy-btn:hover{ background:#faf7f3; }
   .contact-actions{ display:grid; gap:10px; }
   .contact-btn{ display:flex; align-items:center; justify-content:center; gap:9px; min-height:46px; border-radius:10px; font-weight:750; font-size:14px; }
   .contact-btn.instagram{ color:#fff; background:linear-gradient(90deg,#ff7a18,#e1306c,#833ab4); }
@@ -111,18 +117,22 @@
 
     <section class="product-info">
       <h1 class="product-title">French Vintage Solid-Wood Chopping Board</h1>
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-        <div class="hint">Item ID: <span id="pid_text">1051258760560</span></div>
-        <button id="copyBtn" style="border:1px solid #eee;border-radius:999px;padding:4px 10px;font-size:12px;background:#fff;cursor:pointer;">Copy</button>
-      </div>
+      <div class="hint">Item ID: <span id="pid_text">1051258760560</span></div>
       <div class="row" style="margin-top:10px;"><div class="p">Price upon request</div></div>
 
       <div class="contact-box">
         <h2>Interested in this piece?</h2>
-        <p>Please contact us with the Item ID to confirm availability, shipping options and delivery costs.</p>
+        <p>Copy the enquiry below, then contact us via Instagram or email.</p>
+        <div class="enquiry-copy">
+          <span class="enquiry-label">Item ID</span>
+          <div class="enquiry-row">
+            <div class="enquiry-value">1051258760560</div>
+            <button id="copyEnquiryBtn" class="enquiry-copy-btn" type="button">Copy</button>
+          </div>
+        </div>
         <div class="contact-actions">
-          <a class="contact-btn instagram" href="https://www.instagram.com/collection.de.maman/" target="_blank" rel="noopener noreferrer">◎ Enquire on Instagram</a>
-          <a class="contact-btn email" href="mailto:le20082436@hotmail.fr?subject=Enquiry%20about%20Item%201051258760560&amp;body=Hello%2C%0A%0AI%27m%20interested%20in%20Item%201051258760560.%20Could%20you%20please%20confirm%20availability%20and%20shipping%20options%3F%0A%0AThank%20you.">✉ Email us</a>
+          <a class="contact-btn instagram" href="https://ig.me/m/collection.de.maman" target="_blank" rel="noopener noreferrer">◎ Enquire on Instagram</a>
+          <a class="contact-btn email" href="mailto:le20082436@hotmail.fr?subject=Enquiry%20about%20Item%201051258760560&amp;body=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%201051258760560%0AProduct%3A%20French%20Vintage%20Solid-Wood%20Chopping%20Board%0ALink%3A%20https%3A//www.collectiondemaman.com/en/p/1051258760560.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you.">✉ Email us</a>
         </div>
         <div class="reply-note">We typically reply within 24 hours.</div>
       </div>
@@ -182,14 +192,36 @@ document.querySelectorAll('.thumb-btn').forEach(btn => {
   });
 });
 
-const copyBtn = document.getElementById('copyBtn');
-copyBtn?.addEventListener('click', ()=>{
-  const text = document.getElementById('pid_text').innerText;
-  navigator.clipboard.writeText(text).then(()=>{
-    copyBtn.innerText="Copied";
-    setTimeout(()=>copyBtn.innerText="Copy", 1500);
-  });
+const copyEnquiryBtn = document.getElementById('copyEnquiryBtn');
+copyEnquiryBtn?.addEventListener('click', ()=>{
+  const enquiryText = "Hello,\n\nI'm interested in this item.\n\nItem ID: 1051258760560\nProduct: French Vintage Solid-Wood Chopping Board\nLink: https://www.collectiondemaman.com/en/p/1051258760560.html\n\nCould you please confirm availability and shipping cost?\n\nThank you.";
+  const markCopied = ()=>{
+    copyEnquiryBtn.innerText = "✓ Copied";
+    setTimeout(()=>copyEnquiryBtn.innerText = "Copy", 1800);
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(enquiryText).then(markCopied).catch(()=>{
+      fallbackCopy(enquiryText, markCopied);
+    });
+  } else {
+    fallbackCopy(enquiryText, markCopied);
+  }
 });
+function fallbackCopy(text, onDone){
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  try {
+    document.execCommand('copy');
+    onDone();
+  } finally {
+    document.body.removeChild(area);
+  }
+}
 
 document.getElementById('q').addEventListener('keydown', (e)=>{
   if(e.key==='Enter'){
