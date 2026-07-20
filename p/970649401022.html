@@ -46,7 +46,43 @@
 
   .allimgs{ margin-top:12px; } .oneimg{ margin:10px 0; }
   .oneimg img{ width:100%; max-width:980px; height:auto; display:block; }
-  .desc{ white-space:pre-wrap; line-height:1.5; font-size:14px; }
+
+  .product-layout{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr); gap:36px; align-items:start; }
+  .gallery{ display:grid; grid-template-columns:76px minmax(0,1fr); gap:12px; position:sticky; top:76px; }
+  .thumb-list{ display:flex; flex-direction:column; gap:10px; max-height:720px; overflow:auto; padding-right:2px; }
+  .thumb-btn{ width:76px; height:76px; padding:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#f5f5f5; cursor:pointer; }
+  .thumb-btn.active{ border-color:#111; box-shadow:0 0 0 1px #111; }
+  .thumb-btn img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .main-photo{ min-height:520px; border-radius:14px; overflow:hidden; background:#f4f4f4; display:flex; align-items:center; justify-content:center; }
+  .main-photo img{ width:100%; height:auto; max-height:760px; object-fit:contain; display:block; }
+  .product-info{ min-width:0; }
+  .product-title{ font-size:26px; line-height:1.35; font-weight:750; margin:0 0 12px; white-space:pre-wrap; }
+  .price-large{ margin-top:12px; font-size:24px; font-weight:900; color:#ff6a00; }
+  .contact-box{ margin:20px 0; padding:20px; border:1px solid #eee5da; border-radius:14px; background:linear-gradient(135deg,#fffaf4,#fff); box-shadow:0 10px 28px rgba(0,0,0,.05); }
+  .contact-box h2{ margin:0 0 8px; font-size:18px; }
+  .contact-box p{ margin:0 0 14px; color:#444; line-height:1.65; font-size:14px; }
+  .enquiry-btn{ width:100%; min-height:48px; border:0; border-radius:10px; background:#111; color:#fff; cursor:pointer; font-weight:750; font-size:14px; }
+  .enquiry-btn:hover{ background:#2a2a2a; }
+  .copy-note{ margin-top:10px; text-align:center; color:#777; font-size:12px; min-height:18px; }
+  .desc{ margin-top:18px; white-space:pre-wrap; line-height:1.75; font-size:14.5px; }
+  .trust-strip{ margin-top:36px; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+  .trust-item{ padding:20px 14px; text-align:center; border-right:1px solid var(--border); }
+  .trust-item:last-child{ border-right:0; }
+  .trust-icon{ font-size:24px; margin-bottom:8px; }
+  .trust-title{ font-weight:750; font-size:13px; }
+  .trust-text{ margin-top:5px; color:#777; font-size:11px; line-height:1.45; }
+
+  @media (max-width:820px){
+    .product-layout{ grid-template-columns:1fr; gap:20px; }
+    .gallery{ position:static; grid-template-columns:1fr; }
+    .thumb-list{ order:2; flex-direction:row; max-height:none; overflow:auto; }
+    .thumb-btn{ flex:0 0 66px; width:66px; height:66px; }
+    .main-photo{ min-height:300px; }
+    .product-title{ font-size:21px; }
+    .trust-strip{ grid-template-columns:repeat(2,1fr); }
+    .trust-item:nth-child(2){ border-right:0; }
+    .trust-item:nth-child(-n+2){ border-bottom:1px solid var(--border); }
+  }
 </style>
 </head>
 <body>
@@ -59,15 +95,29 @@
 </header>
 
 <div class="wrap">
-  <div class="detail">
-    <div class="panel">
-      <div class="h1">【国内现货】法国中古瑕疵特价壁挂圣水台
-尺寸：70*31.5cm</div>
-      <div style="margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-        <div class="hint">产品ID：<span id="pid_text">970649401022</span></div>
-        <button id="copyBtn" style="border:1px solid #eee;border-radius:999px;padding:4px 10px;font-size:12px;background:#fff;cursor:pointer;">复制</button>
+  <div class="product-layout">
+    <section class="gallery" aria-label="商品图片">
+      <div class="thumb-list"><button class="thumb-btn active" type="button" data-full="../图片夹/970649401022-01.jpg" aria-label="查看第 1 张图片"><img loading="lazy" decoding="async" src="../图片夹/970649401022-01.jpg" alt=""></button>
+<button class="thumb-btn" type="button" data-full="../图片夹/970649401022-02.jpg" aria-label="查看第 2 张图片"><img loading="lazy" decoding="async" src="../图片夹/970649401022-02.jpg" alt=""></button>
+<button class="thumb-btn" type="button" data-full="../图片夹/970649401022-03.jpg" aria-label="查看第 3 张图片"><img loading="lazy" decoding="async" src="../图片夹/970649401022-03.jpg" alt=""></button>
+<button class="thumb-btn" type="button" data-full="../图片夹/970649401022-04.jpg" aria-label="查看第 4 张图片"><img loading="lazy" decoding="async" src="../图片夹/970649401022-04.jpg" alt=""></button></div>
+      <div class="main-photo"><img id="mainProductImage" src="../图片夹/970649401022-01.jpg" alt="【国内现货】法国中古瑕疵特价壁挂圣水台
+尺寸：70*31.5cm"></div>
+    </section>
+
+    <section class="product-info">
+      <h1 class="product-title">【国内现货】法国中古瑕疵特价壁挂圣水台
+尺寸：70*31.5cm</h1>
+      <div class="hint">产品编号：970649401022</div>
+      <div class="price-large">980 ¥</div>
+
+      <div class="contact-box">
+        <h2>对这件商品感兴趣？</h2>
+        <p>点击下方按钮复制商品信息，然后打开微信粘贴发送给我们。</p>
+        <button id="enquiryBtn" class="enquiry-btn" type="button">咨询这件商品</button>
+        <div id="copyNote" class="copy-note"></div>
       </div>
-      <div class="row" style="margin-top:8px;"><div class="p">980 ¥</div></div>
+
       <div class="desc">【国内现货】法国中古瑕疵特价壁挂圣水台
 尺寸：70
 
@@ -88,11 +138,14 @@
 细致打包，破损包赔，中古/古董物品经不起折腾，一经售出不退不换，感谢理解
 
 法式乡村风｜中古瓷器｜古董瓷器｜法国古董｜中古餐具｜法式乡村风｜法式中古｜西洋古董｜西洋瓷器｜</div>
-    </div>
-    <div class="allimgs"><div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/970649401022-01.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/970649401022-02.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/970649401022-03.jpg" alt=""></div>
-<div class="oneimg"><img loading="lazy" decoding="async" src="../图片夹/970649401022-04.jpg" alt=""></div></div>
+    </section>
+  </div>
+
+  <div class="trust-strip">
+    <div class="trust-item"><div class="trust-icon">▣</div><div class="trust-title">全球发货</div><div class="trust-text">可根据目的地提供运输报价。</div></div>
+    <div class="trust-item"><div class="trust-icon">♢</div><div class="trust-title">安全包装</div><div class="trust-text">针对中古器物进行细致加固包装。</div></div>
+    <div class="trust-item"><div class="trust-icon">◷</div><div class="trust-title">中古唯一</div><div class="trust-text">请下单前仔细查看图片与品相说明。</div></div>
+    <div class="trust-item"><div class="trust-icon">▢</div><div class="trust-title">欢迎咨询</div><div class="trust-text">需要补充图片或细节可随时联系。</div></div>
   </div>
 </div>
 
@@ -114,14 +167,55 @@ if (curQ) {
   if (qInput) qInput.value = curQ;
 }
 
-const copyBtn = document.getElementById('copyBtn');
-copyBtn?.addEventListener('click', ()=>{
-  const text = document.getElementById('pid_text').innerText;
-  navigator.clipboard.writeText(text).then(()=>{
-    copyBtn.innerText="已复制";
-    setTimeout(()=>copyBtn.innerText="复制", 1500);
+document.querySelectorAll('.thumb-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const main = document.getElementById('mainProductImage');
+    if (!main) return;
+    main.src = btn.dataset.full;
+    document.querySelectorAll('.thumb-btn').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
   });
 });
+
+const enquiryBtn = document.getElementById('enquiryBtn');
+const copyNote = document.getElementById('copyNote');
+
+enquiryBtn?.addEventListener('click', ()=>{
+  const enquiryText = "你好，我想咨询这件商品。\n\n商品编号：970649401022\n商品名称：【国内现货】法国中古瑕疵特价壁挂圣水台\n尺寸：70*31.5cm\n商品链接：https://www.collectiondemaman.com/p/970649401022.html";
+
+  const markCopied = ()=>{
+    enquiryBtn.innerText = "✓ 商品信息已复制";
+    copyNote.innerText = "请打开微信并粘贴发送给我们";
+    setTimeout(()=>{
+      enquiryBtn.innerText = "咨询这件商品";
+      copyNote.innerText = "";
+    }, 2200);
+  };
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(enquiryText).then(markCopied).catch(()=>{
+      fallbackCopy(enquiryText, markCopied);
+    });
+  } else {
+    fallbackCopy(enquiryText, markCopied);
+  }
+});
+
+function fallbackCopy(text, onDone){
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  try {
+    document.execCommand('copy');
+    onDone();
+  } finally {
+    document.body.removeChild(area);
+  }
+}
 
 document.getElementById('q').addEventListener('keydown', (e)=>{
   if(e.key==='Enter'){
