@@ -13,6 +13,8 @@
   header{ position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); z-index:10; }
   .bar{ max-width:980px; margin:0 auto; padding:10px 12px; display:flex; gap:10px; align-items:center; }
   .brand{ font-weight:900; letter-spacing:.2px; font-size:16px; } .hint{ color:var(--muted); font-size:12px; }
+  .about-link{ font-size:14px; color:#444; white-space:nowrap; padding:8px 4px; }
+  .about-link:hover{ color:#111; }
   input[type="search"]{ flex:1; border:1px solid var(--border); border-radius:999px; padding:10px 12px; font-size:14px; outline:none; }
   .pill{ border:1px solid var(--border); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted); white-space:nowrap; }
   .wrap{ max-width:980px; margin:0 auto; padding:12px 12px 56px; }
@@ -98,6 +100,7 @@
 <header>
   <div class="bar">
     <a class="back" id="backLink" href="/en/">Back</a>
+    <a class="about-link" href="/en/about.html">About</a>
     <input id="q" type="search" placeholder="Search catalogue" />
     <div class="pill">Available</div>
   </div>
@@ -106,13 +109,13 @@
 <div class="wrap">
   <div class="product-layout">
     <section class="gallery" aria-label="Product images">
-      <div class="thumb-list"><button class="thumb-btn active" type="button" data-full="/图片夹/1050381911708-01.jpg" aria-label="View image 1"><img loading="lazy" decoding="async" src="/图片夹/1050381911708-01.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1050381911708-02.jpg" aria-label="View image 2"><img loading="lazy" decoding="async" src="/图片夹/1050381911708-02.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1050381911708-03.jpg" aria-label="View image 3"><img loading="lazy" decoding="async" src="/图片夹/1050381911708-03.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1050381911708-04.jpg" aria-label="View image 4"><img loading="lazy" decoding="async" src="/图片夹/1050381911708-04.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1050381911708-05.jpg" aria-label="View image 5"><img loading="lazy" decoding="async" src="/图片夹/1050381911708-05.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1050381911708-06.jpg" aria-label="View image 6"><img loading="lazy" decoding="async" src="/图片夹/1050381911708-06.jpg" alt=""></button></div>
-      <div class="main-photo"><img id="mainProductImage" src="/图片夹/1050381911708-01.jpg" alt="Collection of French Vintage Earthenware Jars"></div>
+      <div class="thumb-list"><button class="thumb-btn active" type="button" data-full="/en/detail/1050381911708-01-5e8920c081.webp" aria-label="View image 1"><img loading="lazy" decoding="async" src="/en/thumb/1050381911708-01-5e8920c081.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1050381911708-02-04444d3598.webp" aria-label="View image 2"><img loading="lazy" decoding="async" src="/en/thumb/1050381911708-02-04444d3598.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1050381911708-03-cb4344f995.webp" aria-label="View image 3"><img loading="lazy" decoding="async" src="/en/thumb/1050381911708-03-cb4344f995.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1050381911708-04-b1b8b50459.webp" aria-label="View image 4"><img loading="lazy" decoding="async" src="/en/thumb/1050381911708-04-b1b8b50459.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1050381911708-05-5e07a9239a.webp" aria-label="View image 5"><img loading="lazy" decoding="async" src="/en/thumb/1050381911708-05-5e07a9239a.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1050381911708-06-98dd8c01dc.webp" aria-label="View image 6"><img loading="lazy" decoding="async" src="/en/thumb/1050381911708-06-98dd8c01dc.webp" alt=""></button></div>
+      <div class="main-photo"><img id="mainProductImage" src="/en/detail/1050381911708-01-5e8920c081.webp" fetchpriority="high" decoding="async" alt="Collection of French Vintage Earthenware Jars"></div>
     </section>
 
     <section class="product-info">

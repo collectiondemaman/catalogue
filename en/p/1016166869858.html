@@ -13,6 +13,8 @@
   header{ position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); z-index:10; }
   .bar{ max-width:980px; margin:0 auto; padding:10px 12px; display:flex; gap:10px; align-items:center; }
   .brand{ font-weight:900; letter-spacing:.2px; font-size:16px; } .hint{ color:var(--muted); font-size:12px; }
+  .about-link{ font-size:14px; color:#444; white-space:nowrap; padding:8px 4px; }
+  .about-link:hover{ color:#111; }
   input[type="search"]{ flex:1; border:1px solid var(--border); border-radius:999px; padding:10px 12px; font-size:14px; outline:none; }
   .pill{ border:1px solid var(--border); padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted); white-space:nowrap; }
   .wrap{ max-width:980px; margin:0 auto; padding:12px 12px 56px; }
@@ -98,6 +100,7 @@
 <header>
   <div class="bar">
     <a class="back" id="backLink" href="/en/">Back</a>
+    <a class="about-link" href="/en/about.html">About</a>
     <input id="q" type="search" placeholder="Search catalogue" />
     <div class="pill">Available</div>
   </div>
@@ -106,16 +109,16 @@
 <div class="wrap">
   <div class="product-layout">
     <section class="gallery" aria-label="Product images">
-      <div class="thumb-list"><button class="thumb-btn active" type="button" data-full="/图片夹/1016166869858-01.jpg" aria-label="View image 1"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-01.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-02.jpg" aria-label="View image 2"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-02.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-03.jpg" aria-label="View image 3"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-03.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-04.jpg" aria-label="View image 4"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-04.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-05.jpg" aria-label="View image 5"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-05.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-06.jpg" aria-label="View image 6"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-06.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-07.jpg" aria-label="View image 7"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-07.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-08.jpg" aria-label="View image 8"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-08.jpg" alt=""></button>
-<button class="thumb-btn" type="button" data-full="/图片夹/1016166869858-09.jpg" aria-label="View image 9"><img loading="lazy" decoding="async" src="/图片夹/1016166869858-09.jpg" alt=""></button></div>
-      <div class="main-photo"><img id="mainProductImage" src="/图片夹/1016166869858-01.jpg" alt="French Antique Walnut Dressing Table, Louis XV Rococo Marquetry"></div>
+      <div class="thumb-list"><button class="thumb-btn active" type="button" data-full="/en/detail/1016166869858-01-8d2b570c7c.webp" aria-label="View image 1"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-01-8d2b570c7c.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-02-4392cb6684.webp" aria-label="View image 2"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-02-4392cb6684.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-03-f412b377a0.webp" aria-label="View image 3"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-03-f412b377a0.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-04-d6a3480de1.webp" aria-label="View image 4"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-04-d6a3480de1.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-05-d8b951a534.webp" aria-label="View image 5"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-05-d8b951a534.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-06-ccc6959704.webp" aria-label="View image 6"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-06-ccc6959704.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-07-77a48879fd.webp" aria-label="View image 7"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-07-77a48879fd.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-08-d8d957ed77.webp" aria-label="View image 8"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-08-d8d957ed77.webp" alt=""></button>
+<button class="thumb-btn" type="button" data-full="/en/detail/1016166869858-09-bf33758f8d.webp" aria-label="View image 9"><img loading="lazy" decoding="async" src="/en/thumb/1016166869858-09-bf33758f8d.webp" alt=""></button></div>
+      <div class="main-photo"><img id="mainProductImage" src="/en/detail/1016166869858-01-8d2b570c7c.webp" fetchpriority="high" decoding="async" alt="French Antique Walnut Dressing Table, Louis XV Rococo Marquetry"></div>
     </section>
 
     <section class="product-info">
