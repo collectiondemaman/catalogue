@@ -69,6 +69,7 @@
   .contact-box{ margin:18px 0 20px; padding:20px; border:1px solid #eee5da; border-radius:14px; background:linear-gradient(135deg,#fffaf4,#fff); box-shadow:0 10px 28px rgba(0,0,0,.05); }
   .contact-box h2{ margin:0 0 8px; font-size:18px; }
   .contact-box p{ margin:0 0 14px; color:#444; line-height:1.55; font-size:14px; }
+  .instagram-browser-note{ display:none; margin:18px 0 20px; padding:16px 18px; border:1px solid #eee5da; border-radius:14px; background:#fffaf4; color:#333; font-size:14px; line-height:1.55; text-align:center; }
   .enquiry-copy{ margin:14px 0; }
   .enquiry-label{ display:block; margin-bottom:6px; color:#555; font-size:12px; font-weight:700; }
   .enquiry-row{ display:grid; grid-template-columns:minmax(0,1fr) auto; border:1px solid #ded7cf; border-radius:10px; overflow:hidden; background:#fff; }
@@ -128,7 +129,11 @@
       <div class="hint">Item ID: <span id="pid_text">783722821496</span></div>
       <div class="row" style="margin-top:10px;"><div class="p">Price upon request</div></div>
 
-      <div class="contact-box">
+      <div id="instagramBrowserNote" class="instagram-browser-note">
+        Like this item? Tap the Share icon below to ask about price and shipping.
+      </div>
+
+      <div id="externalContactBox" class="contact-box">
         <h2>Interested in this piece?</h2>
         <p>Copy the enquiry below, then contact us via Instagram or email.</p>
         <div class="enquiry-copy">
@@ -179,6 +184,16 @@
 const params = new URLSearchParams(location.search);
 const curTag = (params.get('tag') || '').trim();
 const curQ = (params.get('q') || '').trim();
+
+// Instagram 内置浏览器已经自带底部 Share 图标。
+// 在该环境中隐藏重复的 Instagram / Email 联系框，改为提示用户直接点击下方分享图标。
+const isInstagramBrowser = /Instagram/i.test(navigator.userAgent || '');
+const instagramBrowserNote = document.getElementById('instagramBrowserNote');
+const externalContactBox = document.getElementById('externalContactBox');
+if (isInstagramBrowser) {
+  if (instagramBrowserNote) instagramBrowserNote.style.display = 'block';
+  if (externalContactBox) externalContactBox.style.display = 'none';
+}
 
 const backLink = document.getElementById('backLink');
 if (backLink && (curTag || curQ)) {
