@@ -155,6 +155,21 @@ if (backLink && (curTag || curQ)) {
   backLink.href = `../index.html?${p.toString()}`;
 }
 
+if (backLink) {
+  backLink.addEventListener('click', (e) => {
+    let hasSiteHistory = false;
+    try {
+      hasSiteHistory = !!document.referrer &&
+        new URL(document.referrer).origin === location.origin &&
+        history.length > 1;
+    } catch (err) {}
+    if (hasSiteHistory) {
+      e.preventDefault();
+      history.back();
+    }
+  });
+}
+
 if (curQ) {
   const qInput = document.getElementById('q');
   if (qInput) qInput.value = curQ;
