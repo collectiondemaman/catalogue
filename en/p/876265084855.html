@@ -204,6 +204,23 @@ if (backLink && (curTag || curQ)) {
   backLink.href = `/en/?${p.toString()}`;
 }
 
+if (backLink) {
+  backLink.addEventListener('click', (e) => {
+    let cameFromIndex = false;
+    try {
+      if (document.referrer) {
+        const ref = new URL(document.referrer);
+        cameFromIndex = ref.origin === location.origin &&
+          (ref.pathname === '/en/' || ref.pathname.endsWith('/en/index.html'));
+      }
+    } catch (err) {}
+    if (cameFromIndex || history.length > 1) {
+      e.preventDefault();
+      history.back();
+    }
+  });
+}
+
 if (curQ) {
   const qInput = document.getElementById('q');
   if (qInput) qInput.value = curQ;
