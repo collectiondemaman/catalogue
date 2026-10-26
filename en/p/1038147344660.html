@@ -79,6 +79,7 @@
   .contact-actions{ display:grid; gap:10px; }
   .contact-btn{ display:flex; align-items:center; justify-content:center; gap:9px; min-height:46px; border-radius:10px; font-weight:750; font-size:14px; }
   .contact-btn.instagram{ color:#fff; background:linear-gradient(90deg,#ff7a18,#e1306c,#833ab4); }
+  .contact-btn.whatsapp{ color:#fff; background:#18794e; }
   .contact-btn.email{ border:1px solid #b96e5b; background:#fff; }
   .reply-note{ margin-top:11px; text-align:center; color:#777; font-size:12px; }
   .desc{ margin-top:18px; font-size:14px; line-height:1.7; max-width:820px; }
@@ -141,7 +142,7 @@
 
       <div id="externalContactBox" class="contact-box">
         <h2>Interested in this piece?</h2>
-        <p>Copy the enquiry below, then contact us via Instagram or email.</p>
+        <p>Contact us on WhatsApp or by email with the enquiry already filled in, or copy it for Instagram.</p>
         <div class="enquiry-copy">
           <span class="enquiry-label">Item ID</span>
           <div class="enquiry-row">
@@ -150,8 +151,9 @@
           </div>
         </div>
         <div class="contact-actions">
+          <a class="contact-btn whatsapp" href="https://wa.me/33648326911?text=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%201038147344660%0AProduct%3A%20French%20Vintage%20Copper%20Long-Handled%20Ladle%20%E2%80%94%20Suitable%20as%20Wall-Mounted%20Vase%0ALink%3A%20https%3A%2F%2Fwww.collectiondemaman.com%2Fen%2Fp%2F1038147344660.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you." target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a>
           <a class="contact-btn instagram" href="https://ig.me/m/collection.de.maman" target="_blank" rel="noopener noreferrer">◎ Enquire on Instagram</a>
-          <a class="contact-btn email" href="mailto:le20082436@hotmail.fr?subject=Enquiry%20about%20Item%201038147344660&amp;body=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%201038147344660%0AProduct%3A%20French%20Vintage%20Copper%20Long-Handled%20Ladle%20%E2%80%94%20Suitable%20as%20Wall-Mounted%20Vase%0ALink%3A%20https%3A//www.collectiondemaman.com/en/p/1038147344660.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you.">✉ Email us</a>
+          <a class="contact-btn email" href="mailto:le20082436@gmail.com?subject=Enquiry%20about%20Item%201038147344660&amp;body=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%201038147344660%0AProduct%3A%20French%20Vintage%20Copper%20Long-Handled%20Ladle%20%E2%80%94%20Suitable%20as%20Wall-Mounted%20Vase%0ALink%3A%20https%3A%2F%2Fwww.collectiondemaman.com%2Fen%2Fp%2F1038147344660.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you.">✉ Email us</a>
         </div>
         <div class="reply-note">We typically reply within 24 hours.</div>
       </div>
@@ -191,13 +193,13 @@ const curTag = (params.get('tag') || '').trim();
 const curQ = (params.get('q') || '').trim();
 
 // Instagram 内置浏览器已经自带底部 Share 图标。
-// 在该环境中隐藏重复的 Instagram / Email 联系框，改为提示用户直接点击下方分享图标。
+// Keep contact links available inside Instagram as well.
 const isInstagramBrowser = /Instagram/i.test(navigator.userAgent || '');
 const instagramBrowserNote = document.getElementById('instagramBrowserNote');
 const externalContactBox = document.getElementById('externalContactBox');
 if (isInstagramBrowser) {
   if (instagramBrowserNote) instagramBrowserNote.style.display = 'block';
-  if (externalContactBox) externalContactBox.style.display = 'none';
+  if (externalContactBox) externalContactBox.style.display = 'block';
 }
 
 const backLink = document.getElementById('backLink');
