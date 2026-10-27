@@ -104,6 +104,11 @@
     .trust-item:nth-child(2){ border-right:0; }
     .trust-item:nth-child(-n+2){ border-bottom:1px solid var(--border); }
   }
+  .home-contact-icons{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+  .home-contact-icons a{display:inline-flex;align-items:center;justify-content:center;width:32px;height:36px;color:#666;border-radius:6px;}
+  .home-contact-icons a:hover{color:#111;background:#f5f5f5;}
+  .home-contact-icons a:focus-visible{outline:2px solid #777;outline-offset:2px;}
+  .home-contact-icons svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://www.collectiondemaman.com/en/p/975778144055.html">
@@ -154,7 +159,8 @@
         </div>
         <div class="contact-actions">
           <a class="contact-btn instagram" href="https://ig.me/m/collection.de.maman" target="_blank" rel="noopener noreferrer">◎ Enquire on Instagram</a>
-          <a class="contact-btn email" href="mailto:le20082436@hotmail.fr?subject=Enquiry%20about%20Item%20975778144055&amp;body=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%20975778144055%0AProduct%3A%20French%20Vintage%20Sarreguemines%20Embossed%20Hand-Painted%20Rose%20Soup%20Tureen%20%E2%80%94%20Rare%0ALink%3A%20https%3A//www.collectiondemaman.com/en/p/975778144055.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you.">✉ Email us</a>
+          <a class="contact-btn email" href="https://wa.me/33648326911?text=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%20975778144055%0AProduct%3A%20French%20Vintage%20Sarreguemines%20Embossed%20Hand-Painted%20Rose%20Soup%20Tureen%20%E2%80%94%20Rare%0ALink%3A%20https%3A%2F%2Fwww.collectiondemaman.com%2Fen%2Fp%2F975778144055.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you." target="_blank" rel="noopener noreferrer">Enquire on WhatsApp</a>
+          <a class="contact-btn email" href="mailto:le20082436@gmail.com?subject=Enquiry%20about%20Item%20975778144055&amp;body=Hello%2C%0A%0AI%27m%20interested%20in%20this%20item.%0A%0AItem%20ID%3A%20975778144055%0AProduct%3A%20French%20Vintage%20Sarreguemines%20Embossed%20Hand-Painted%20Rose%20Soup%20Tureen%20%E2%80%94%20Rare%0ALink%3A%20https%3A//www.collectiondemaman.com/en/p/975778144055.html%0A%0ACould%20you%20please%20confirm%20availability%20and%20shipping%20cost%3F%0A%0AThank%20you.">✉ Email us</a>
         </div>
         <div class="reply-note">We typically reply within 24 hours.</div>
       </div>
@@ -201,7 +207,7 @@ const instagramBrowserNote = document.getElementById('instagramBrowserNote');
 const externalContactBox = document.getElementById('externalContactBox');
 if (isInstagramBrowser) {
   if (instagramBrowserNote) instagramBrowserNote.style.display = 'block';
-  if (externalContactBox) externalContactBox.style.display = 'none';
+  if (externalContactBox) externalContactBox.style.display = 'block';
 }
 
 const backLink = document.getElementById('backLink');
