@@ -5,6 +5,11 @@
       "source": "/",
       "destination": "/en/index.html",
       "statusCode": 301
+    },
+    {
+      "source": "/en/p/1010215047364.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
     }
   ]
 }
