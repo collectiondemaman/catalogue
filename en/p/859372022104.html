@@ -109,6 +109,22 @@
   .home-contact-icons a:hover{color:#111;background:#f5f5f5;}
   .home-contact-icons a:focus-visible{outline:2px solid #777;outline-offset:2px;}
   .home-contact-icons svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+
+  .category-panel{position:sticky;top:var(--header-h);z-index:9;background:#fff;}
+  .category-panel>summary{display:none;}
+  .category-panel .tags{position:static;}
+  @media(max-width:768px){
+    .category-panel{margin-top:10px;border:1px solid #eee;border-radius:12px;background:#fff;}
+    .category-panel>summary{display:flex;align-items:center;gap:6px;min-height:44px;padding:10px 12px;cursor:pointer;font-size:14px;list-style:none;}
+    .category-panel>summary::-webkit-details-marker{display:none;}
+    .category-panel>summary:focus-visible{outline:2px solid #9b3049;outline-offset:2px;}
+    .category-arrow{margin-left:auto;}.category-panel[open] .category-arrow{transform:rotate(180deg);}
+    .category-panel .tags{flex-wrap:wrap;overflow:visible;margin:0;padding:8px 10px 12px;gap:7px;max-height:45vh;overflow-y:auto;}
+    .category-panel .tagbtn{padding:7px 10px;min-height:36px;display:flex;align-items:center;}
+    .pid,.product-id,.enquiry-copy{display:none!important;}
+    .fav-id{display:none;}
+  }
+
 </style>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://www.collectiondemaman.com/en/p/859372022104.html">
@@ -137,7 +153,7 @@
 
     <section class="product-info">
       <h1 class="product-title">French Vintage Angel Cardstock Wall Hanging</h1>
-      <div class="hint">Item ID: <span id="pid_text">859372022104</span></div>
+      <div class="hint product-id">Item ID: <span id="pid_text">859372022104</span></div>
       <div class="row" style="margin-top:10px;"><div class="p"></div></div>
 
       <div id="instagramBrowserNote" class="instagram-browser-note">
@@ -305,7 +321,7 @@ function paint(){document.getElementById('fav-count').textContent=saved.length;d
 window.addEventListener('storage',e=>{if(e.key===KEY||e.key===null){read();paint();}});
 function enhance(){document.querySelectorAll('.card[data-pid]').forEach(el=>{if(el.querySelector('[data-favorite-pid]'))return;const pid=el.dataset.pid;el.append(button(catalogue.get(pid)||{pid,title:el.querySelector('.t')?.textContent||pid}));});const p=document.getElementById('pid_text');if(p&&!document.querySelector('.product-info [data-favorite-pid]'))p.closest('.product-info').querySelector('h1').after(button({pid:p.textContent.trim(),title:document.querySelector('h1').textContent}));paint();}
 const host=document.getElementById('favorites-list');
-function render(){if(!host)return;host.replaceChildren();if(!ready){host.textContent='Loading current availability…';return;}if(!saved.length){host.textContent='Your favorites list is empty. Tap a heart in the catalogue to save a piece.';return;}saved.forEach(old=>{const item=catalogue.get(old.pid),r=document.createElement('div');r.className='fav-row';const info=document.createElement('div');info.className='fav-info';const title=document.createElement(item?'a':'span');title.textContent=(item||old).title;if(item)title.href='/en/p/'+encodeURIComponent(item.pid)+'.html';info.append(title);const status=document.createElement('div');status.className='fav-status';status.textContent='ID: '+old.pid+(item?' · Available':' · No longer available');info.append(status);if(item?.cover_thumb){const img=document.createElement('img');img.src='/en/thumb/'+encodeURIComponent(item.cover_thumb);img.alt='';img.loading='lazy';r.append(img);}r.append(info);const remove=document.createElement('button');remove.type='button';remove.className='fav-button';remove.textContent='Remove';remove.onclick=()=>{saved=saved.filter(x=>x.pid!==old.pid);persist();};r.append(remove);host.append(r);});}
+function render(){if(!host)return;host.replaceChildren();if(!ready){host.textContent='Loading current availability…';return;}if(!saved.length){host.textContent='Your favorites list is empty. Tap a heart in the catalogue to save a piece.';return;}saved.forEach(old=>{const item=catalogue.get(old.pid),r=document.createElement('div');r.className='fav-row';const info=document.createElement('div');info.className='fav-info';const title=document.createElement(item?'a':'span');title.textContent=(item||old).title;if(item)title.href='/en/p/'+encodeURIComponent(item.pid)+'.html';info.append(title);const status=document.createElement('div');status.className='fav-status';const idLabel=document.createElement('span');idLabel.className='fav-id';idLabel.textContent='ID: '+old.pid+' · ';status.append(idLabel,document.createTextNode(item?'Available':'No longer available'));info.append(status);if(item?.cover_thumb){const img=document.createElement('img');img.src='/en/thumb/'+encodeURIComponent(item.cover_thumb);img.alt='';img.loading='lazy';r.append(img);}r.append(info);const remove=document.createElement('button');remove.type='button';remove.className='fav-button';remove.textContent='Remove';remove.onclick=()=>{saved=saved.filter(x=>x.pid!==old.pid);persist();};r.append(remove);host.append(r);});}
 function enquiry(){if(!ready){message('Please wait until availability has loaded.');return null;}const list=saved.map(x=>catalogue.get(x.pid)).filter(Boolean);if(!list.length){message('Save an available item before sending an enquiry.');return null;}return 'Hello,\n\nI am interested in these pieces:\n\n'+list.map((x,i)=>(i+1)+'. '+x.title+'\nItem ID: '+x.pid+'\n'+new URL('/en/p/'+encodeURIComponent(x.pid)+'.html',location.origin).href).join('\n\n')+'\n\nPlease confirm availability and shipping cost.\nDelivery country / postcode: \n\nThank you.';}
 for(const mode of ['whatsapp','email','copy']){const b=document.getElementById('fav-'+mode);if(b)b.onclick=async()=>{const text=enquiry();if(!text)return;if(mode==='copy'){try{await navigator.clipboard.writeText(text);message('Enquiry copied.');}catch(e){const t=document.createElement('textarea');t.value=text;host.before(t);t.select();message('Copy the enquiry from the text box.');}}else if(mode==='whatsapp')window.open('https://wa.me/33648326911?text='+encodeURIComponent(text),'_blank','noopener,noreferrer');else location.href='mailto:le20082436@gmail.com?subject='+encodeURIComponent('Enquiry about my favorite pieces')+'&body='+encodeURIComponent(text);};}
 read();new MutationObserver(records=>{if(records.some(r=>Array.from(r.addedNodes).some(n=>n.nodeType===1&&(n.matches?.('.card')||n.querySelector?.('.card')))))enhance();}).observe(document.body,{childList:true,subtree:true});enhance();
