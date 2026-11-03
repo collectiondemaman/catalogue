@@ -131,7 +131,7 @@ const empty = document.getElementById('empty');
 const tagsBar = document.getElementById('tags');
 
 let selectedTag = '';
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 24;
 let filtered = [];
 let cursor = 0;
 let sentinel = null;
@@ -240,6 +240,32 @@ function ensureSentinel(){
 }
 function disconnectIO(){ if (io){ io.disconnect(); io=null; } }
 
+let moreButton=null, nearBottomScheduled=false;
+function updateMoreButton(){
+  if(!moreButton){
+    moreButton=document.createElement('button');moreButton.type='button';
+    moreButton.textContent='加载更多商品';
+    moreButton.style.cssText='display:block;margin:20px auto;padding:12px 24px;border:1px solid #ddd;border-radius:12px;background:white;cursor:pointer';
+    moreButton.onclick=()=>{appendNextPage();scheduleNearBottom();};
+    grid.parentNode.appendChild(moreButton);
+  }
+  moreButton.hidden=cursor>=filtered.length;
+  moreButton.style.display=moreButton.hidden?'none':'block';
+}
+function scheduleNearBottom(){
+  if(nearBottomScheduled)return;
+  nearBottomScheduled=true;
+  requestAnimationFrame(()=>{
+    nearBottomScheduled=false;
+    if(cursor<filtered.length && grid.getBoundingClientRect().bottom<window.innerHeight+300){
+      appendNextPage();scheduleNearBottom();
+    }
+  });
+}
+window.addEventListener('scroll',scheduleNearBottom,{passive:true});
+window.addEventListener('resize',scheduleNearBottom);
+window.addEventListener('pageshow',scheduleNearBottom);
+
 function connectIO(){
   disconnectIO();
   if (!('IntersectionObserver' in window)) { appendNextPage(); appendNextPage(); return; }
@@ -257,6 +283,8 @@ function renderReset(list){
   empty.style.display = filtered.length ? 'none' : 'block';
   appendNextPage();
   connectIO();
+  updateMoreButton();
+  scheduleNearBottom();
 }
 
 function appendNextPage(){
@@ -266,13 +294,16 @@ function appendNextPage(){
   for (let i=cursor;i<end;i++) frag.appendChild(card(filtered[i], i));
   grid.appendChild(frag);
   cursor = end;
+  updateMoreButton();
   if (cursor >= filtered.length) disconnectIO();
 }
 
 function restoreBrowsePosition(state){
   if (!state) return;
   const targetCursor = Math.max(PAGE_SIZE, Number(state.cursor) || PAGE_SIZE);
-  while (cursor < targetCursor && cursor < filtered.length) appendNextPage();
+  while (cursor < targetCursor && cursor < filtered.length) {
+    const previousCursor=cursor;appendNextPage();if(cursor<=previousCursor)break;
+  }
   const y = Math.max(0, Number(state.scrollY) || 0);
   requestAnimationFrame(()=>{
     requestAnimationFrame(()=>{
