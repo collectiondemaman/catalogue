@@ -26,7 +26,7 @@
     .grid{ display:grid; gap:10px; margin-top:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
     .grid .card{ width:auto; }
     @media (max-width:320px){ .grid{ grid-template-columns:1fr; } }
-    @media (min-width:768px){ .grid{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
+    @media (min-width:768px){ .grid{ grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); } }
   }
 
   .card{ border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.04); }
@@ -120,7 +120,7 @@
     <section class="product-info">
       <h1 class="product-title">【国内现货】法国中古陶瓷煤油灯（已改电）
 品相好，可正常使用</h1>
-      <div class="hint">产品编号：<span id="pid_text">1051150314657</span></div>
+      <div class="hint">产品编号：1051150314657</div>
       <div class="price-large">1650 ¥</div>
 
       <div class="desc">【国内现货】法国中古陶瓷煤油灯（已改电）
@@ -248,41 +248,6 @@ document.getElementById('q').addEventListener('keydown', (e)=>{
     location.href = qs ? `../index.html?${qs}` : '../index.html';
   }
 });
-</script>
-
-
-<style>
-.fav-link{position:fixed;right:12px;top:8px;z-index:100;background:white;border:1px solid #ddd;border-radius:24px;padding:9px 13px;color:#9b3049;text-decoration:none;min-height:44px}
-header .bar{padding-right:100px!important}.fav-button{min-height:44px;padding:10px 14px;border:1px solid #ddd;border-radius:12px;background:white;color:#9b3049;cursor:pointer}.fav-button[aria-pressed="true"]{background:#fff0f3}.card{position:relative}.card>.fav-button{position:absolute;top:8px;right:8px;z-index:2}.fav-row{display:flex;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid #eee}.fav-row img{width:72px;height:72px;object-fit:cover;border-radius:8px}.fav-row .fav-info{flex:1;min-width:0}.fav-actions{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.fav-actions button,.fav-actions a{padding:12px;border:1px solid #ddd;border-radius:12px;background:white;color:inherit}.fav-status{font-size:13px;color:#765}.fav-note{color:#666;font-size:14px}
-@media(max-width:600px){header .bar{flex-wrap:wrap}.fav-row{flex-wrap:wrap}.fav-link{right:8px}.fav-row .fav-info{overflow-wrap:anywhere}}
-</style>
-<a class="fav-link" href="/favorites.html" aria-label="查看喜欢">♡ <span id="fav-count">0</span></a>
-<script>
-(()=>{'use strict';
-const KEY='collectionDeMaman:cn:favorites:v1', catalogue=new Map();
-let saved=[], ready=false;
-const note=document.createElement('p');note.className='fav-note';note.setAttribute('role','status');
-function message(s){note.textContent=s;if(!note.isConnected)(document.querySelector('main,.wrap')||document.body).append(note);}
-function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||'[]');saved=Array.isArray(a)?Array.from(new Map(a.filter(x=>x&&typeof x.pid==='string').map(x=>[x.pid,{pid:x.pid,title:String(x.title||x.pid),cover_thumb:String(x.cover_thumb||'')}])).values()):[];}catch(e){saved=[];message('浏览器不支持保存，喜欢记录仅在当前页面有效。');}}
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){message('未能保存到设备，请保持页面打开。');}paint();}
-function has(pid){return saved.some(x=>x.pid===pid);}
-function button(item){const b=document.createElement('button');b.type='button';b.className='fav-button';b.dataset.favoritePid=String(item.pid);b.onclick=()=>{read();if(has(String(item.pid)))saved=saved.filter(x=>x.pid!==String(item.pid));else saved.push({pid:String(item.pid),title:item.title,cover_thumb:item.cover_thumb||''});persist();};return b;}
-function paint(){document.getElementById('fav-count').textContent=saved.length;document.querySelectorAll('[data-favorite-pid]').forEach(b=>{const active=has(b.dataset.favoritePid);b.textContent=active?'♥ 已喜欢':'♡ 喜欢';b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-label',active?'取消喜欢':'加入喜欢');});render();}
-window.addEventListener('storage',e=>{if(e.key===KEY||e.key===null){read();paint();}});
-// Back/forward cache restores the old JS state: reload shared favorites on return.
-function refreshFavorites(){read();paint();}
-window.addEventListener('pageshow',refreshFavorites);
-window.addEventListener('focus',refreshFavorites);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshFavorites();});
-
-function enhance(){document.querySelectorAll('.card[data-pid]').forEach(el=>{if(el.querySelector('[data-favorite-pid]'))return;const pid=el.dataset.pid;el.append(button(catalogue.get(pid)||{pid,title:el.querySelector('.t')?.textContent||pid}));});const p=document.getElementById('pid_text');if(p&&!document.querySelector('.product-info [data-favorite-pid]'))p.closest('.product-info').querySelector('h1').after(button({pid:p.textContent.trim(),title:document.querySelector('h1').textContent}));paint();}
-const host=document.getElementById('favorites-list');
-function render(){if(!host)return;host.replaceChildren();if(!ready){host.textContent='正在读取在售状态…';return;}if(!saved.length){host.textContent='还没有喜欢的商品，点击商品爱心即可收藏。';return;}saved.forEach(old=>{const item=catalogue.get(old.pid),r=document.createElement('div');r.className='fav-row';const info=document.createElement('div');info.className='fav-info';const title=document.createElement(item?'a':'span');title.textContent=(item||old).title;if(item)title.href='/p/'+encodeURIComponent(item.pid)+'.html';info.append(title);const status=document.createElement('div');status.className='fav-status';const idLabel=document.createElement('span');idLabel.className='fav-id';idLabel.textContent='ID: '+old.pid+' · ';status.append(idLabel,document.createTextNode(item?'在售':'已下架或暂不可用'));info.append(status);if(item?.cover_thumb){const img=document.createElement('img');img.src='/thumb/'+encodeURIComponent(item.cover_thumb);img.alt='';img.loading='lazy';r.append(img);}r.append(info);const remove=document.createElement('button');remove.type='button';remove.className='fav-button';remove.textContent='移除';remove.onclick=()=>{read();saved=saved.filter(x=>x.pid!==old.pid);persist();};r.append(remove);host.append(r);});}
-function enquiry(){if(!ready){message('请等待商品状态加载完成。');return null;}const list=saved.map(x=>catalogue.get(x.pid)).filter(Boolean);if(!list.length){message('请先收藏在售商品。');return null;}return '你好，我想咨询以下商品：\n\n'+list.map((x,i)=>(i+1)+'. '+x.title+'\n商品编号：'+x.pid+'\n'+new URL('/p/'+encodeURIComponent(x.pid)+'.html',location.origin).href).join('\n\n')+'\n\n请确认价格和运费。\n收货国家及邮编：';}
-for(const mode of ['copy']){const b=document.getElementById('fav-'+mode);if(b)b.onclick=async()=>{const text=enquiry();if(!text)return;if(mode==='copy'){try{await navigator.clipboard.writeText(text);message('咨询清单已复制。');}catch(e){const t=document.createElement('textarea');t.value=text;host.before(t);t.select();message('请从文本框手动复制咨询清单。');}}};}
-read();new MutationObserver(records=>{if(records.some(r=>Array.from(r.addedNodes).some(n=>n.nodeType===1&&(n.matches?.('.card')||n.querySelector?.('.card')))))enhance();}).observe(document.body,{childList:true,subtree:true});enhance();
-fetch('/favorites-catalogue-cn.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json();}).then(items=>{if(!Array.isArray(items))throw Error('Invalid catalogue');items.forEach(x=>catalogue.set(String(x.pid),x));ready=true;enhance();}).catch(()=>{if(host)host.textContent='商品状态读取失败，请刷新重试；喜欢记录仍保留。';message('暂时无法核实商品状态，请刷新后再复制咨询清单。');});
-})();
 </script>
 
 </body>
