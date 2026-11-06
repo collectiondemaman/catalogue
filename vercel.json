@@ -342,12 +342,22 @@
       "statusCode": 302
     },
     {
+      "source": "/en/p/1010241436205.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
       "source": "/en/p/1010250532256.html",
       "destination": "/en/index.html",
       "statusCode": 302
     },
     {
       "source": "/en/p/1010376537651.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
+      "source": "/en/p/1010528008667.html",
       "destination": "/en/index.html",
       "statusCode": 302
     },
@@ -2748,6 +2758,11 @@
     },
     {
       "source": "/en/p/933271648223.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
+      "source": "/en/p/934247559923.html",
       "destination": "/en/index.html",
       "statusCode": 302
     },
