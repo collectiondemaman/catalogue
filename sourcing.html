@@ -98,39 +98,41 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="robots" content="noindex,follow"></head>
 <body>
-<header><div class="bar"><a href="/index.html">← 返回商品目录</a><strong>帮我找货</strong></div></header>
-<main class="wrap sourcing"><h1>遇见你想找的中古好物</h1><p>上传参考图片，留下预算和微信号，我们会帮你留意。</p>
+<header class="sourcing-header"><div class="bar"><a href="/index.html">← 返回商品目录</a></div></header>
+<main class="wrap sourcing"><h1>遇见你想找的中古好物</h1><p>上传参考图片，留下预算和微信号或微信昵称，我们会帮你淘心仪的宝贝</p>
 <form id="source-form"><label>参考图片（必填，最多3张，合计不超过8MB）<input id="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple required></label><div id="previews"></div>
 <label>预算金额<input name="预算" type="number" min="1" step="0.01" required placeholder="例如 1000"></label>
-<label>币种<select name="币种"><option>人民币 CNY</option><option>欧元 EUR</option><option>美元 USD</option></select></label>
-<label>运费<select name="预算是否包含运费"><option>不含运费</option><option>包含运费</option></select></label>
-<label>微信号<input name="微信号" maxlength="80" autocomplete="off" required placeholder="请确认允许通过微信号搜索"></label>
-<label>补充说明<textarea name="补充说明" maxlength="2000" rows="4" placeholder="尺寸、颜色、数量等偏好"></textarea></label>
-<p class="hint">图片、预算和微信号将通过 FormSubmit 发送给布丁妈，仅用于找货联系。历史记录保存在当前浏览器，清理记录或换设备后无法恢复；不保存图片副本。</p>
-<label><input type="checkbox" required> 我同意提交以上信息用于找货联系</label>
-<button id="send" type="submit">提交找货需求</button><p id="result" role="status" aria-live="polite"></p></form>
+<label>微信号或微信昵称<input name="微信号或微信昵称" maxlength="80" autocomplete="off" required placeholder="填写你的微信号或微信昵称"></label>
+<label>备注（非必填）<textarea name="备注" maxlength="2000" rows="4" placeholder="尺寸、颜色、数量等偏好"></textarea></label>
+<p class="hint">图片、预算和微信号或微信昵称将通过 FormSubmit 发送给布丁妈，仅用于找货联系。历史记录保存在当前浏览器，清理记录或换设备后无法恢复；历史中仅保存压缩后的图片缩略图。</p>
+
+<button id="send" type="submit">提交</button><p id="result" role="status" aria-live="polite"></p></form>
 <h2>我的提交历史</h2><p class="hint">仅为本机提交记录，不代表找货进度。</p><div id="source-history"></div><button id="clear-history" type="button">清除本机记录</button></main>
-<style>.sourcing{max-width:680px}.sourcing label{display:block;margin:18px 0}.sourcing input:not([type=checkbox]),.sourcing textarea,.sourcing select{display:block;width:100%;box-sizing:border-box;margin-top:8px;padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit}.sourcing button{padding:12px 18px;border:1px solid #ddd;border-radius:12px;cursor:pointer}.sourcing #send{background:#222;color:white;width:100%}#previews{display:flex;gap:8px;flex-wrap:wrap}#previews img{width:88px;height:88px;object-fit:cover;border-radius:10px}.source-record{padding:14px 0;border-bottom:1px solid #ddd;white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<style>.sourcing-link{display:none!important}header.sourcing-header .bar{padding-right:90px!important;min-height:54px;box-sizing:border-box;display:flex;align-items:center}header .bar a{white-space:nowrap}.history-thumbnails{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.history-thumbnails img{width:76px;height:76px;object-fit:cover;border-radius:8px}.sourcing{max-width:680px}.sourcing label{display:block;margin:18px 0}.sourcing input:not([type=checkbox]),.sourcing textarea,.sourcing select{display:block;width:100%;box-sizing:border-box;margin-top:8px;padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit}.sourcing button{padding:12px 18px;border:1px solid #ddd;border-radius:12px;cursor:pointer}.sourcing #send{background:#222;color:white;width:100%}#previews{display:flex;gap:8px;flex-wrap:wrap}#previews img{width:88px;height:88px;object-fit:cover;border-radius:10px}.source-record{padding:14px 0;border-bottom:1px solid #ddd;white-space:pre-wrap;overflow-wrap:anywhere}</style>
 <script>
 (()=>{'use strict';
 const key='collectionDeMaman:sourcing:v1',form=document.getElementById('source-form'),photos=document.getElementById('photos'),result=document.getElementById('result'),send=document.getElementById('send');
 let records=[],urls=[],busy=false;
 try{const a=JSON.parse(localStorage.getItem(key)||'[]');records=Array.isArray(a)?a.slice(0,50):[];}catch(e){}
-function render(){const host=document.getElementById('source-history');host.replaceChildren();if(!records.length){host.textContent='还没有提交记录。';return;}records.forEach(r=>{const el=document.createElement('div');el.className='source-record';el.textContent=[r.time,'编号：'+r.id,'预算：'+r.budget+' '+r.currency+' · '+r.shipping,'微信：'+r.wechat,'参考图片：'+r.images+'张',r.note||'',r.status].join('\n');host.append(el);});}
+function render(){const host=document.getElementById('source-history');host.replaceChildren();if(!records.length){host.textContent='还没有提交记录。';return;}records.forEach(r=>{const el=document.createElement('div');el.className='source-record';el.textContent=[r.time,'编号：'+r.id,'预算：'+r.budget,'微信：'+r.wechat,'参考图片：'+r.images+'张',r.note||'',r.status].join('\n');if(Array.isArray(r.thumbnails)){const gallery=document.createElement('div');gallery.className='history-thumbnails';r.thumbnails.forEach(src=>{if(typeof src!=='string'||!src.startsWith('data:image/jpeg;base64,'))return;const img=document.createElement('img');img.src=src;img.alt='已提交的参考图片';gallery.append(img);});el.append(gallery);}host.append(el);});}
 function save(){try{localStorage.setItem(key,JSON.stringify(records.slice(0,50)));return true;}catch(e){return false;}}
+async function thumbnail(file){
+ return new Promise(resolve=>{const img=new Image(),url=URL.createObjectURL(file);const finish=v=>{URL.revokeObjectURL(url);resolve(v);};img.onerror=()=>finish('');img.onload=()=>{try{const scale=Math.min(1,180/Math.max(img.width,img.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);finish(canvas.toDataURL('image/jpeg',0.65));}catch(e){finish('');}};img.src=url;});
+}
 function filesError(){const a=Array.from(photos.files);if(!a.length)return '请上传参考图片。';if(a.length>3)return '最多上传3张图片。';if(a.some(f=>!['image/jpeg','image/png','image/webp'].includes(f.type)))return '请使用 JPG、PNG 或 WebP 图片。';if(a.reduce((n,f)=>n+f.size,0)>8*1024*1024)return '图片合计不能超过8MB，请压缩后重试。';return '';}
 photos.onchange=()=>{urls.forEach(URL.revokeObjectURL);urls=[];const host=document.getElementById('previews');host.replaceChildren();result.textContent=filesError();Array.from(photos.files).slice(0,3).forEach(f=>{const img=document.createElement('img');const url=URL.createObjectURL(f);urls.push(url);img.src=url;img.alt='找货参考图片';host.append(img);});};
 document.getElementById('clear-history').onclick=()=>{if(confirm('清除当前设备的找货记录？')){records=[];save();render();}};
 form.onsubmit=async e=>{e.preventDefault();if(busy)return;const error=filesError();if(error){result.textContent=error;return;}if(!form.reportValidity())return;
-const data=new FormData(form);const wechat=String(data.get('微信号')||'').trim();if(!wechat){result.textContent='请填写有效微信号。';return;}data.set('微信号',wechat);
+const data=new FormData(form);const wechat=String(data.get('微信号或微信昵称')||'').trim();if(!wechat){result.textContent='请填写微信号或微信昵称。';return;}data.set('微信号或微信昵称',wechat);
 const id='F'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);data.set('需求编号',id);data.set('_subject','布丁妈｜新的找货需求 '+id);data.set('_captcha','false');data.set('_template','table');Array.from(photos.files).forEach((f,i)=>data.append(i===0?'attachment':'attachment'+(i+1),f,f.name));
-const record={id,time:new Date().toLocaleString('zh-CN'),budget:String(data.get('预算')),currency:String(data.get('币种')),shipping:String(data.get('预算是否包含运费')),wechat,note:String(data.get('补充说明')||''),images:photos.files.length,status:'提交中'};
+const record={id,time:new Date().toLocaleString('zh-CN'),budget:String(data.get('预算')),wechat,note:String(data.get('备注')||''),images:photos.files.length,status:'提交中'};
 busy=true;send.disabled=true;send.textContent='正在上传，请稍候…';result.textContent='';
+record.thumbnails=(await Promise.all(Array.from(photos.files).map(thumbnail))).filter(Boolean);
 const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),90000);
 try{const response=await fetch('https://formsubmit.co/ajax/yimin.zhan8@gmail.com',{method:'POST',body:data,headers:{Accept:'application/json'},signal:controller.signal});const answer=await response.json();if(!response.ok||!(answer.success===true||answer.success==='true'))throw Error('服务未确认接收');
 if(/activat|confirm.*email/i.test(String(answer.message||''))){record.status='等待商家激活收件邮箱，请稍后确认';result.textContent='提交服务需要商家激活邮箱，暂未确认收件，请通过微信 collectiondemaman 联系我们。';}else{record.status='提交服务已接收';result.textContent='已收到你的找货需求！我们会帮你留意，找到合适的藏品后通过微信联系你。';form.reset();urls.forEach(URL.revokeObjectURL);urls=[];document.getElementById('previews').replaceChildren();}
-}catch(e){record.status='未确认接收，请联系商家核实';result.textContent='暂未确认提交成功，请勿连续重复提交。请通过微信 collectiondemaman 联系我们，并提供需求编号：'+id;}
-finally{clearTimeout(timer);records.unshift(record);if(!save())result.textContent+=' 当前浏览器无法保存历史，请截图保留需求编号。';render();busy=false;send.disabled=false;send.textContent='提交找货需求';}
+}catch(e){record.status='提交未完成';result.textContent='提交未完成，请检查网络后重试。需求编号：'+id;}
+finally{clearTimeout(timer);records.unshift(record);if(!save())result.textContent+=' 当前浏览器无法保存历史，请截图保留需求编号。';render();busy=false;send.disabled=false;send.textContent='提交';}
 };render();})();
 </script>
 
