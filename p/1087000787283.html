@@ -38,9 +38,9 @@ Sarreguemines 1875–1918 年 RIGHI系列茶壶，器型干净利落，整体状
   .p{ font-weight:900; color:#ff6a00; }
   .pid{ color:#aaa; font-size:11px; margin-top:6px; text-align:right; letter-spacing:.3px; }
 
-  .category-panel{margin:12px 0; border:1px solid var(--border);border-radius:12px;padding:10px 12px;}
+  .category-panel{position:sticky;top:var(--header-h,80px);z-index:11;background:#fff;margin:12px 0; border:1px solid var(--border);border-radius:12px;padding:10px 12px;}
   .category-panel summary{cursor:pointer;font-weight:600;}
-  .category-panel .tags{flex-wrap:wrap;overflow:visible;}
+  .category-panel .tags{position:static;flex-wrap:wrap;overflow:visible;max-height:55vh;overflow-y:auto;}
   .tags{ display:flex; gap:8px; overflow:auto; padding-bottom:6px; margin-top:10px;
     position:sticky; top:var(--header-h); background:rgba(255,255,255,.95); backdrop-filter:blur(8px); z-index:9; padding-top:6px; }
   @media (max-width:768px){ .tags{ flex-wrap:wrap; overflow:visible; padding-bottom:10px; } }
