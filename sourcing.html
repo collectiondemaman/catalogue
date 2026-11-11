@@ -100,14 +100,14 @@
 <body>
 <header class="sourcing-header"><div class="bar"><a href="/index.html">← 返回商品目录</a></div></header>
 <main class="wrap sourcing"><h1>遇见你想找的中古好物</h1><p>上传参考图片，留下预算和微信号或微信昵称，我们会帮你淘心仪的宝贝</p>
-<form id="source-form"><label>参考图片（必填，最多3张，合计不超过8MB）<input id="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple required></label><div id="previews"></div>
+<form id="source-form" action="https://formsubmit.co/yimin.zhan8@gmail.com" method="post" enctype="multipart/form-data"><label>参考图片（必填，最多3张，合计不超过8MB）<input id="photos" type="file" accept="image/jpeg,image/png,image/webp" multiple required></label><div id="previews"></div>
 <label>预算金额<input name="预算" type="number" min="1" step="0.01" required placeholder="例如 1000"></label>
 <label>微信号或微信昵称<input name="微信号或微信昵称" maxlength="80" autocomplete="off" required placeholder="填写你的微信号或微信昵称"></label>
 <label>备注（非必填）<textarea name="备注" maxlength="2000" rows="4" placeholder="尺寸、颜色、数量等偏好"></textarea></label>
 <p class="hint">图片、预算和微信号或微信昵称将通过 FormSubmit 发送给布丁妈，仅用于找货联系。历史记录保存在当前浏览器，清理记录或换设备后无法恢复；历史中仅保存压缩后的图片缩略图。</p>
 
-<button id="send" type="submit">提交</button><button id="cancel-upload" type="button" hidden>取消等待</button><p id="result" role="status" aria-live="polite"></p></form>
-<h2>我的提交历史</h2><p class="hint">仅为本机提交记录，不代表找货进度。</p><div id="source-history"></div><button id="clear-history" type="button">清除本机记录</button></main>
+<button id="send" type="submit">提交</button><p id="result" role="status" aria-live="polite"></p></form>
+<h2>我的提交历史</h2><p class="hint">本机记录用于查询需求编号。邮件是否送达请联系商家核实。</p><div id="source-history"></div><button id="clear-history" type="button">清除本机记录</button></main>
 <style>.sourcing-link{display:none!important}header.sourcing-header .bar{padding-right:90px!important;min-height:54px;box-sizing:border-box;display:flex;align-items:center}header .bar a{white-space:nowrap}.history-thumbnails{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.history-thumbnails img{width:76px;height:76px;object-fit:cover;border-radius:8px}.sourcing{max-width:680px}.sourcing label{display:block;margin:18px 0}.sourcing input:not([type=checkbox]),.sourcing textarea,.sourcing select{display:block;width:100%;box-sizing:border-box;margin-top:8px;padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit}.sourcing button{padding:12px 18px;border:1px solid #ddd;border-radius:12px;cursor:pointer}.sourcing #send{background:#222;color:white;width:100%}#previews{display:flex;gap:8px;flex-wrap:wrap}#previews img{width:88px;height:88px;object-fit:cover;border-radius:10px}.source-record{padding:14px 0;border-bottom:1px solid #ddd;white-space:pre-wrap;overflow-wrap:anywhere}</style>
 <script>
 (()=>{'use strict';
@@ -119,23 +119,103 @@ function save(){try{localStorage.setItem(key,JSON.stringify(records.slice(0,50))
 async function thumbnail(file){
  return new Promise(resolve=>{const img=new Image();let url='',done=false;const timer=setTimeout(()=>finish(''),5000);function finish(v){if(done)return;done=true;clearTimeout(timer);img.onload=img.onerror=null;if(url)URL.revokeObjectURL(url);resolve(v);}try{url=URL.createObjectURL(file);img.onerror=()=>finish('');img.onload=()=>{try{const scale=Math.min(1,180/Math.max(img.width,img.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);finish(canvas.toDataURL('image/jpeg',0.65));}catch(e){finish('');}};img.src=url;}catch(e){finish('');}});
 }
-let activeUpload=null;
-function uploadRequest(data){return new Promise((resolve,reject)=>{const xhr=new XMLHttpRequest();activeUpload=xhr;xhr.open('POST','https://formsubmit.co/ajax/yimin.zhan8@gmail.com');xhr.timeout=45000;xhr.setRequestHeader('Accept','application/json');xhr.upload.onprogress=e=>{send.textContent=e.lengthComputable?'正在上传 '+Math.round(e.loaded/e.total*100)+'%':'正在连接上传服务…';};xhr.upload.onload=()=>{send.textContent='图片已传出，等待服务确认…';};xhr.onload=()=>{let answer;try{answer=JSON.parse(xhr.responseText);}catch(e){reject(Error('服务返回异常页面（HTTP '+xhr.status+'）'));return;}if(xhr.status<200||xhr.status>=300||!(answer.success===true||answer.success==='true')){reject(Error('HTTP '+xhr.status+'：'+String(answer.message||answer.error||'未确认接收').slice(0,350)));return;}resolve(answer);};xhr.onerror=()=>reject(Error('无法连接邮件提交服务，请通过微信联系商家'));xhr.ontimeout=()=>reject(Error('提交服务45秒未响应，请先核实是否收到邮件'));xhr.onabort=()=>reject(Error('已取消等待；请先核实是否收到邮件，避免重复提交'));xhr.send(data);});}
-function filesError(){const a=Array.from(photos.files);if(!a.length)return '请上传参考图片。';if(a.length>3)return '最多上传3张图片。';if(a.some(f=>!['image/jpeg','image/png','image/webp'].includes(f.type)))return '请使用 JPG、PNG 或 WebP 图片。';if(a.reduce((n,f)=>n+f.size,0)>8*1024*1024)return '图片合计不能超过8MB，请压缩后重试。';return '';}
+function filesError(){const a=Array.from(photos.files);if(!a.length)return '请上传参考图片。';if(a.some(f=>f.size===0))return '图片文件为空，请重新选择。';if(a.length>3)return '最多上传3张图片。';if(a.some(f=>!['image/jpeg','image/png','image/webp'].includes(f.type)))return '请使用 JPG、PNG 或 WebP 图片。';if(a.reduce((n,f)=>n+f.size,0)>8*1024*1024)return '图片合计不能超过8MB，请压缩后重试。';return '';}
 photos.onchange=()=>{urls.forEach(URL.revokeObjectURL);urls=[];const host=document.getElementById('previews');host.replaceChildren();result.textContent=filesError();Array.from(photos.files).slice(0,3).forEach(f=>{const img=document.createElement('img');const url=URL.createObjectURL(f);urls.push(url);img.src=url;img.alt='找货参考图片';host.append(img);});};
 document.getElementById('clear-history').onclick=()=>{if(confirm('清除当前设备的找货记录？')){records=[];save();render();}};
-const cancel=document.getElementById('cancel-upload');cancel.onclick=()=>{if(activeUpload)activeUpload.abort();};
-form.onsubmit=async e=>{e.preventDefault();if(busy)return;const error=filesError();if(error){result.textContent=error;return;}if(!form.reportValidity())return;
-const data=new FormData(form);const wechat=String(data.get('微信号或微信昵称')||'').trim();if(!wechat){result.textContent='请填写微信号或微信昵称。';return;}data.set('微信号或微信昵称',wechat);
-const id='F'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);data.set('需求编号',id);data.set('_subject','布丁妈｜新的找货需求 '+id);data.set('_captcha','false');data.set('_template','table');Array.from(photos.files).forEach((f,i)=>data.append(i===0?'attachment':'attachment'+(i+1),f,f.name));
-const record={id,time:new Date().toLocaleString('zh-CN'),budget:String(data.get('预算')),wechat,note:String(data.get('备注')||''),images:photos.files.length,status:'提交中'};
-busy=true;send.disabled=true;send.textContent='正在上传，请稍候…';result.textContent='';
-cancel.hidden=false;cancel.disabled=true;
-try{send.textContent='正在准备图片…';record.thumbnails=(await Promise.all(Array.from(photos.files).map(thumbnail))).filter(Boolean);cancel.disabled=false;send.textContent='正在连接上传服务…';const answer=await uploadRequest(data);
-if(/activat|confirm.*email/i.test(String(answer.message||''))){record.status='等待商家激活收件邮箱，请稍后确认';result.textContent='提交服务需要商家激活邮箱，暂未确认收件，请通过微信 collectiondemaman 联系我们。';}else{record.status='提交服务已接收';result.textContent='已收到你的找货需求！我们会帮你留意，找到合适的藏品后通过微信联系你。';form.reset();urls.forEach(URL.revokeObjectURL);urls=[];document.getElementById('previews').replaceChildren();}
-}catch(e){const detail=e.name==='AbortError'?'上传超时（90秒）':e instanceof TypeError?'无法连接提交服务：可能是网络或跨域限制':String(e.message||e);record.status='提交未完成';record.error=detail;result.textContent='提交未完成：'+detail+'。请截图发给我们；需求编号：'+id;}
-finally{activeUpload=null;cancel.hidden=true;records.unshift(record);if(!save())result.textContent+=' 当前浏览器无法保存历史，请截图保留需求编号。';render();busy=false;send.disabled=false;send.textContent='提交';}
-};render();})();
+let submission=null;
+form.addEventListener('formdata', event=>{
+ if(!submission)return;
+ const {id,files,wechat}=submission;
+ const data=event.formData;
+ data.set('微信号或微信昵称',wechat);
+ data.set('需求编号',id);
+ data.set('_subject','布丁妈｜新的找货需求 '+id);
+ data.set('_captcha','false');
+ data.set('_template','table');
+ if(/^https?:$/.test(location.protocol)){
+  const next=new URL(location.pathname,location.origin);
+  next.searchParams.set('sourcing_request',id);
+  data.set('_next',next.href);
+ }
+ files.forEach((file,index)=>{
+  data.append(['attachment','attachment2','attachment3'][index],file,file.name);
+ });
+});
+function unlock(){
+ busy=false;
+ submission=null;
+ send.disabled=false;
+ send.textContent='提交';
+}
+function showReturn(){
+ const id=new URLSearchParams(location.search).get('sourcing_request');
+ if(id&&/^F[a-z0-9]+$/.test(id)){
+  result.textContent='已返回找货页面。需求编号：'+id+'。如需确认邮件是否送达，请提供此编号联系商家。';
+ }
+}
+form.addEventListener('submit',async event=>{
+ event.preventDefault();
+ if(busy)return;
+ const error=filesError();
+ if(error){result.textContent=error;return;}
+ if(!/^https?:$/.test(location.protocol)){
+  result.textContent='请打开已部署的网站后提交找货需求。';
+  return;
+ }
+ if(!('FormDataEvent' in window)){
+  result.textContent='当前浏览器不支持此图片上传方式，请使用新版浏览器。';
+  return;
+ }
+ const wechatField=form.elements.namedItem('微信号或微信昵称');
+ if(!wechatField.value.trim()){result.textContent='请填写微信号或微信昵称。';wechatField.focus();return;}
+ const files=Array.from(photos.files);
+ busy=true;
+ send.disabled=true;
+ send.textContent='正在准备图片…';
+ result.textContent='';
+ const thumbnails=(await Promise.all(files.map(thumbnail))).filter(Boolean);
+ if(files.length!==photos.files.length||files.some((file,index)=>file!==photos.files[index])){
+  result.textContent='所选图片已更改，请重新提交。';
+  unlock();
+  return;
+ }
+ const wechat=wechatField.value.trim();
+ if(!form.reportValidity()||!wechat){
+  if(!wechat){result.textContent='请填写微信号或微信昵称。';wechatField.focus();}
+  unlock();
+  return;
+ }
+ const id='F'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+ const record={
+  id,time:new Date().toLocaleString('zh-CN'),
+  budget:form.elements.namedItem('预算').value,wechat,
+  note:form.elements.namedItem('备注').value,images:files.length,
+  status:'已发起提交，送达待核实',thumbnails
+ };
+ records.unshift(record);
+ if(!save()){
+  delete record.thumbnails;
+  if(!save())result.textContent='当前浏览器无法保存本机历史。';
+ }
+ render();
+ result.textContent+=' 需求编号：'+id+'。请等待浏览器跳转。';
+ send.textContent='正在提交…';
+ submission={id,files,wechat};
+ HTMLFormElement.prototype.submit.call(form);
+});
+window.addEventListener('pageshow',()=>{
+ if(submission){
+  const {id}=submission;
+  unlock();
+  form.reset();
+  photos.onchange();
+  result.textContent='需求编号：'+id+'。请先联系商家核实邮件是否送达，再决定是否重新提交。';
+ }
+ showReturn();
+});
+render();
+showReturn();
+})();
 </script>
 
 <style>
