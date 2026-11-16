@@ -1937,6 +1937,11 @@
       "statusCode": 302
     },
     {
+      "source": "/en/p/1080554628832.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
       "source": "/en/p/1080817095690.html",
       "destination": "/en/index.html",
       "statusCode": 302
@@ -2018,6 +2023,11 @@
     },
     {
       "source": "/en/p/1087000355221.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
+      "source": "/en/p/1088265956504.html",
       "destination": "/en/index.html",
       "statusCode": 302
     },
@@ -2117,7 +2127,17 @@
       "statusCode": 302
     },
     {
+      "source": "/en/p/1093573537197.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
       "source": "/en/p/1094145706352.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
+      "source": "/en/p/1094146010981.html",
       "destination": "/en/index.html",
       "statusCode": 302
     },
@@ -2333,6 +2353,11 @@
     },
     {
       "source": "/en/p/848372683899.html",
+      "destination": "/en/index.html",
+      "statusCode": 302
+    },
+    {
+      "source": "/en/p/848747782018.html",
       "destination": "/en/index.html",
       "statusCode": 302
     },
