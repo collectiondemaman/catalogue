@@ -141,6 +141,59 @@
 <meta property="og:description" content="Description A vintage Sarreguemines &quot;Richard&quot; children&#x27;s tableware collection from France. The group includes coffee cups, plates, a soup tureen and other assor">
 <meta property="og:image" content="https://www.collectiondemaman.com/en/thumb/1023514700470-01-630557f651.webp">
 <meta name="description" content="Description A vintage Sarreguemines &quot;Richard&quot; children&#x27;s tableware collection from France. The group includes coffee cups, plates, a soup tureen and other assor">
+
+<script id="catalogue-analytics">
+(() => {
+  if (location.protocol !== 'https:' ||
+      !['www.collectiondemaman.com', 'collectiondemaman.com'].includes(location.hostname)) return;
+
+  const key = 'collectiondemaman.analyticsConsent';
+  let choice;
+  try { choice = localStorage.getItem(key); } catch (_) { choice = null; }
+
+  function loadAnalytics() {
+    if (document.getElementById('catalogue-gtm')) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'gtm.start': Date.now(), event: 'gtm.js'});
+    const tag = document.createElement('script');
+    tag.id = 'catalogue-gtm';
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5HNWKJM9';
+    document.head.append(tag);
+  }
+
+  if (choice === 'allow') loadAnalytics();
+  document.addEventListener('DOMContentLoaded', () => {
+    const panel = document.createElement('section');
+    panel.setAttribute('aria-label', 'Analytics preferences');
+    panel.style.cssText = 'position:fixed;bottom:16px;left:16px;right:16px;max-width:440px;padding:15px;border:1px solid #dcd1c3;border-radius:10px;background:#fffaf4;color:#302a23;box-shadow:0 8px 24px #0002;z-index:1000;font:14px/1.5 system-ui';
+    panel.innerHTML = '<p style="margin:0 0 10px">Allow Google Analytics to help us understand how visitors use the catalogue? <a href="/en/privacy.html">Privacy policy</a></p>'
+      + '<button type="button" data-choice="allow">Allow analytics</button> '
+      + '<button type="button" data-choice="decline">Decline</button>';
+    panel.hidden = choice === 'allow' || choice === 'decline';
+    panel.addEventListener('click', (event) => {
+      const next = event.target.dataset.choice;
+      if (!next) return;
+      try { localStorage.setItem(key, next); }
+      catch (_) { panel.hidden = true; return; }
+      const wasAllowed = choice === 'allow';
+      choice = next;
+      panel.hidden = true;
+      if (choice === 'allow') loadAnalytics();
+      else if (wasAllowed) location.reload();
+    });
+    document.body.append(panel);
+    const preferences = document.getElementById('analytics-preferences');
+    if (preferences) {
+      preferences.hidden = false;
+      preferences.addEventListener('click', () => {
+        panel.hidden = false;
+        panel.querySelector('button').focus();
+      });
+    }
+  }, {once: true});
+})();
+</script>
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://www.collectiondemaman.com/en/p/1023514700470.html">
 </head>
