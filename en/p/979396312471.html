@@ -48,7 +48,7 @@
   .p{ font-weight:900; color:#ff6a00; }
   .pid{ color:#aaa; font-size:11px; margin-top:6px; text-align:right; letter-spacing:.3px; }
 
-  .tags{ display:flex; gap:8px; overflow:auto; padding-bottom:6px; margin-top:10px;
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; overflow:visible; padding-bottom:6px; margin-top:10px;
     position:sticky; top:var(--header-h); background:rgba(255,255,255,.95); backdrop-filter:blur(8px); z-index:9; padding-top:6px; }
   @media (max-width:768px){ .tags{ flex-wrap:wrap; overflow:visible; padding-bottom:10px; } }
   .tagbtn{ border:1px solid var(--border); border-radius:999px; padding:7px 10px; font-size:12px; color:var(--muted); white-space:nowrap; background:#fff; cursor:pointer; user-select:none; }
