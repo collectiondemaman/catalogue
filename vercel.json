@@ -582,6 +582,11 @@
       "statusCode": 302
     },
     {
+      "source": "/en/p/1016757663439.html",
+      "destination": "/en/sold.html#item-1016757663439",
+      "statusCode": 302
+    },
+    {
       "source": "/en/p/1017277720935.html",
       "destination": "/en/sold.html#item-1017277720935",
       "statusCode": 302
@@ -1664,6 +1669,11 @@
     {
       "source": "/en/p/1062796698497.html",
       "destination": "/en/sold.html#item-1062796698497",
+      "statusCode": 302
+    },
+    {
+      "source": "/en/p/1062797944343.html",
+      "destination": "/en/sold.html#item-1062797944343",
       "statusCode": 302
     },
     {
