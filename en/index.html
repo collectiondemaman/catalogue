@@ -204,7 +204,7 @@
       <div class="hint">French Vintage &amp; Antiques</div>
     </a>
     <input id="q" type="search" placeholder="Search by maker, item or keyword" />
-    <a class="about-link" href="/en/about.html">Contact</a>
+    <a class="about-link" href="/en/about.html">About</a>
   </div>
 </header>
 
@@ -219,8 +219,7 @@
   </div>
   <details class="category-panel" id="categoryPanel" open>
     <summary>Categories: <span id="categoryCurrent">All</span><span class="category-arrow" aria-hidden="true">⌄</span></summary>
-    <div class="tags" id="tags"></div>
-    <a class="about-link" href="/en/sold.html">Sold (731)</a>
+    <div class="tags" id="tags"><a id="soldCategory" class="tagbtn" href="/en/sold.html">Sold (731)</a></div>
   </details>
   <div class="grid" id="grid"></div>
   <div class="hint" id="empty" style="display:none; text-align:center; margin-top:22px;">No matching available items</div>
@@ -481,6 +480,7 @@ function syncTagActive(){
 }
 
 function buildTags(){
+  const soldLink = document.getElementById('soldCategory');
   tagsBar.innerHTML = '';
   const allBtn = document.createElement('div');
   allBtn.className='tagbtn';
@@ -507,7 +507,9 @@ function buildTags(){
       updateUrl();
     };
     tagsBar.appendChild(b);
+    if (soldLink && t.name === 'Table Art') tagsBar.appendChild(soldLink);
   });
+  if (soldLink && !soldLink.isConnected) tagsBar.appendChild(soldLink);
   syncTagActive();
 }
 
