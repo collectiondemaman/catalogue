@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://www.collectiondemaman.com/en/index.html</loc></url>
-  <url><loc>https://www.collectiondemaman.com/en/stay-paris.html</loc></url>
+  <url><loc>https://www.collectiondemaman.com/en/stay-paris.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.collectiondemaman.com/en/stay-paris.html"/><xhtml:link rel="alternate" hreflang="ja" href="https://www.collectiondemaman.com/ja/stay-paris.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://www.collectiondemaman.com/ko/stay-paris.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.collectiondemaman.com/en/stay-paris.html"/></url>
+  <url><loc>https://www.collectiondemaman.com/ja/stay-paris.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.collectiondemaman.com/en/stay-paris.html"/><xhtml:link rel="alternate" hreflang="ja" href="https://www.collectiondemaman.com/ja/stay-paris.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://www.collectiondemaman.com/ko/stay-paris.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.collectiondemaman.com/en/stay-paris.html"/></url>
+  <url><loc>https://www.collectiondemaman.com/ko/stay-paris.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.collectiondemaman.com/en/stay-paris.html"/><xhtml:link rel="alternate" hreflang="ja" href="https://www.collectiondemaman.com/ja/stay-paris.html"/><xhtml:link rel="alternate" hreflang="ko" href="https://www.collectiondemaman.com/ko/stay-paris.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.collectiondemaman.com/en/stay-paris.html"/></url>
   <url><loc>https://www.collectiondemaman.com/en/about.html</loc></url>
   <url><loc>https://www.collectiondemaman.com/en/privacy.html</loc></url>
   <url><loc>https://www.collectiondemaman.com/en/sold.html</loc></url>

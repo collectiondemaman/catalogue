@@ -44,7 +44,8 @@ function parseCalendar(body) {
       if (period.end > last.end) last.end = period.end;
     } else merged.push({ ...period });
   }
-  return merged;
+  if (periods.length === 0) throw new Error('No valid calendar occupancy events');
+  return { blocked: merged, eventCount: periods.length };
 }
 
 module.exports = async function handler(req, res) {
@@ -61,15 +62,15 @@ module.exports = async function handler(req, res) {
       throw new Error('Invalid calendar configuration');
     }
     const response = await fetch(url, { signal: AbortSignal.timeout(10000),
-      headers: { 'Accept': 'text/calendar,text/plain;q=0.9' }, redirect: 'error' });
+      headers: { 'Accept': 'text/calendar,text/plain;q=0.9' }, redirect: 'follow' });
     if (!response.ok) throw new Error('Calendar source unavailable');
     const length = Number(response.headers.get('content-length') || 0);
     if (length > MAX_BYTES) throw new Error('Calendar too large');
     const body = await response.text();
     if (body.length > MAX_BYTES) throw new Error('Calendar too large');
-    const blocked = parseCalendar(body);
+    const parsedCalendar = parseCalendar(body);
     res.setHeader('Cache-Control', 'public, s-maxage=900, stale-while-revalidate=300');
-    return res.status(200).json({ blocked, refreshedAt: new Date().toISOString(),
+    return res.status(200).json({ blocked: parsedCalendar.blocked, eventCount: parsedCalendar.eventCount, calendarValid: true, refreshedAt: new Date().toISOString(),
       note: 'Calendar sync can be delayed. Dates are subject to host confirmation.' });
   } catch (_) {
     res.setHeader('Cache-Control', 'no-store');
