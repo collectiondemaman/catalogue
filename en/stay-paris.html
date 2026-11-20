@@ -13,6 +13,8 @@
 .calendar-shell{max-width:650px;border:1px solid var(--line);background:#fff;padding:24px;border-radius:12px}.calendar-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.calendar-top strong{font-family:Georgia,serif;font-size:24px;font-weight:400}.calendar-arrow{height:42px;width:44px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;font-size:18px}.calendar-arrow:disabled{opacity:.3;cursor:default}.calendar-weekdays,.calendar-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.calendar-weekdays{text-align:center;font-size:12px;color:var(--muted);margin-bottom:8px}.calendar-day{appearance:none;border:1px solid transparent;background:#f1f5ef;aspect-ratio:1;min-height:35px;border-radius:6px;cursor:pointer;color:var(--ink);font-size:14px}.calendar-day:hover:not(:disabled){border-color:#658067}.calendar-day:focus-visible{outline:2px solid #425f48;outline-offset:2px}.calendar-day:disabled{cursor:default}.calendar-day.blocked{background:#eee6e0;color:#948783;text-decoration:line-through}.calendar-day.past{background:#f6f6f6;color:#bbb}.calendar-day.selected,.calendar-day.inrange{background:#294d40;color:#fff}.calendar-day.checkout{outline:2px solid #294d40;outline-offset:-2px}.calendar-empty{aspect-ratio:1}.calendar-key{display:flex;flex-wrap:wrap;gap:10px 20px;margin:20px 0 12px;font-size:12px;color:var(--muted)}.calendar-key span{display:inline-flex;align-items:center;gap:6px}.dot{display:inline-block;width:12px;height:12px;border-radius:3px}.dot-free{background:#f1f5ef;border:1px solid #ceddcb}.dot-blocked{background:#eee6e0}.dot-selected{background:#294d40}.calendar-status{font-size:13px;color:var(--muted)!important;margin:8px 0!important}.calendar-summary{padding:12px 14px;border:1px solid var(--line);border-radius:6px;font-size:14px;margin:15px 0}.stay-guests{display:flex;align-items:center;gap:12px;font-size:14px;margin:14px 0}.stay-guests select{padding:8px 12px;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:14px}.calendar-actions{display:flex;flex-wrap:wrap;gap:10px}.calendar-actions .stay-button{margin:3px 0}.calendar-shell small{display:block;margin-top:14px;color:var(--muted);font-size:12px;line-height:1.6}@media(max-width:480px){.calendar-shell{padding:14px}.calendar-days,.calendar-weekdays{gap:2px}.calendar-day{font-size:13px;min-height:36px}.calendar-actions{flex-direction:column}.calendar-actions .stay-button{text-align:center}}
 @media(max-width:760px){.stay-head{padding:14px 18px}.stay-brand{font-size:16px}.stay-head nav{gap:12px}.stay-hero{padding:38px 0 18px}.stay-gallery{grid-template-columns:1fr 1fr;grid-template-rows:270px 165px 165px;gap:7px;margin-bottom:30px}.stay-photo:first-child{grid-column:span 2;grid-row:span 1}.stay-columns{grid-template-columns:1fr;gap:8px}.feature-grid{grid-template-columns:1fr 1fr;gap:25px}.stay-section{padding:36px 0}.stay-book{margin:25px 0}.lead{font-size:15px}}
 @media(max-width:420px){.feature-grid{grid-template-columns:1fr}.stay-head{align-items:flex-start;flex-direction:column}}
+.stay-price{font-size:18px;color:var(--ink);margin:0 auto 20px}.stay-price strong{font-family:Georgia,serif;font-size:26px;font-weight:400}.stay-price small{display:block;font-size:12px;color:var(--muted)}
+.stay-review-section{background:#fbf9f6;border:1px solid var(--line);border-radius:12px;padding:30px clamp(20px,4vw,44px);margin:18px 0 55px}.stay-review-row{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}.stay-review-rating{font:400 42px/1.1 Georgia,serif}.stay-review-rating span{font:400 16px system-ui,sans-serif;color:var(--muted)}.stay-review-stars{letter-spacing:3px;color:#9b765d;font-size:22px}.stay-review-sub{font-size:13px;color:var(--muted)}.stay-review-notes{margin:16px 0 0;color:#5f5953;font-size:14px;max-width:680px}.stay-review-source{font-size:12px;color:var(--muted);margin:12px 0 0}.stay-review-link{color:var(--ink);text-decoration:underline;text-underline-offset:3px;font-size:14px}.stay-total{font-weight:700;font-size:16px;color:var(--ink)}
 </style>
 <script id="catalogue-analytics">
 (() => {
@@ -74,12 +76,20 @@
 <section class="stay-hero"><div class="eyebrow">A thoughtfully curated home · Bagneux, France</div><h1>Stay in Paris,<br>live a little differently.</h1>
 <p class="lead">A charming French vintage apartment, filled with character and collected treasures. A quiet place to come home to after exploring Paris.</p>
 <div class="quickfacts"><span>63 m² entire apartment</span><span>2 bedrooms · Sleeps 4</span><span>Balcony</span><span>1 min to Metro Line 4</span></div>
+<p class="stay-price"><strong>€180 per night</strong> · Cleaning included <small>Minimum stay: 2 nights · Any applicable tourist tax is confirmed before booking.</small></p>
 <a class="stay-button" href="#availability">Check dates &amp; availability</a></section>
 <div class="stay-gallery" aria-label="Apartment photo gallery"><figure class="stay-photo"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1701578875954347583/original/7fea640b-3d13-4bc9-b32b-5a04767b2199.jpeg?im_w=1200" alt="Vintage living and dining area" loading="eager" decoding="async"></figure><figure class="stay-photo"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1701578875954347583/original/07c9ed40-4fac-47bc-a7f8-82c9ed4ce3c2.jpeg?im_w=1200" alt="Paris stay apartment interior" loading="lazy" decoding="async"></figure><figure class="stay-photo"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1701578875954347583/original/f3d75fe6-a1b3-45cc-aa9f-34aca1e00b20.jpeg?im_w=1200" alt="Paris stay apartment interior" loading="lazy" decoding="async"></figure><figure class="stay-photo"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1701578875954347583/original/679404db-32ca-43ed-9a8c-883c33040556.jpeg?im_w=1200" alt="Vintage-style apartment" loading="lazy" decoding="async"></figure><figure class="stay-photo"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1701578875954347583/original/f7d521b9-b5e3-4155-8a17-f9a5b93f5cfa.jpeg?im_w=1200" alt="Apartment photo" loading="lazy" decoding="async"></figure></div>
+<section class="stay-review-section" id="guest-reviews" aria-labelledby="guest-reviews-heading">
+<div class="eyebrow">Guest reviews</div><h2 id="guest-reviews-heading">What our guests say</h2>
+<div class="stay-review-row"><div><div class="stay-review-stars" aria-label="5 out of 5 stars">★★★★★</div><div class="stay-review-rating">5.0 <span>/ 5 · 14 Airbnb reviews</span></div><div class="stay-review-sub">Guest favourite · Among the top 10% of eligible homes on Airbnb</div></div>
+<a class="stay-review-link" href="https://fr.airbnb.be/rooms/1701578875954347583" target="_blank" rel="noopener noreferrer">Read all 14 reviews on Airbnb ↗</a></div>
+<p class="stay-review-notes">Guests have particularly appreciated our vintage interiors, convenient metro access, cleanliness and attentive hosting.</p>
+<p class="stay-review-source">Rating and review count checked 21 November 2026. Reviews are hosted by Airbnb. For direct availability enquiries, please use WhatsApp or Instagram below.</p>
+</section>
 <section class="stay-section" id="availability" aria-labelledby="calendar-title">
   <div class="eyebrow">Check your dates</div>
   <h2 id="calendar-title">Availability calendar</h2>
-  <p>Dates are synchronised with our existing bookings. Available-looking dates are not guaranteed until we confirm your enquiry.</p>
+  <p>€180 per night, with cleaning included. Minimum 2 nights. Choose dates to see your estimated accommodation total. Dates are synchronised with existing bookings and subject to final confirmation.</p>
   <div class="calendar-shell">
     <div class="calendar-top">
       <button class="calendar-arrow" id="cal-prev" aria-label="Previous month" type="button">&#8592;</button>
@@ -90,10 +100,10 @@
     <div id="cal-days" class="calendar-days" aria-label="Select check-in and checkout dates"></div>
     <div class="calendar-key"><span><i class="dot dot-free"></i> Appears available</span><span><i class="dot dot-blocked"></i> Unavailable</span><span><i class="dot dot-selected"></i> Your dates</span></div>
     <p class="calendar-status" id="cal-status" role="status">Loading availability…</p>
-    <div class="calendar-summary" id="cal-summary" aria-live="polite">Select your arrival date, then your departure date.</div>
+    <div class="calendar-summary" id="cal-summary" aria-live="polite">Select arrival and departure dates (at least 2 nights).</div>
     <label class="stay-guests" for="stay-guests">Guests <select id="stay-guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option></select></label>
     <div class="calendar-actions"><a class="stay-button" id="cal-wa" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__" target="_blank" rel="noopener noreferrer">Ask about these dates on WhatsApp</a><a class="stay-button secondary" href="https://www.instagram.com/collection.de.maman/" target="_blank" rel="noopener noreferrer">Enquire on Instagram</a></div>
-    <small>Bookings are by enquiry only. No online payment or instant booking. If the calendar cannot refresh, please contact us directly.</small>
+    <small>€180/night including cleaning. Minimum 2 nights; any applicable tourist tax is confirmed before booking. Bookings are by enquiry only. No online payment or instant booking. If the calendar cannot refresh, please contact us directly.</small>
   </div>
 </section>
 <section class="stay-section stay-columns"><div><div class="eyebrow">The apartment</div><h2>A home with a story</h2></div><div><p>Step into a light-filled, peaceful 63 m² apartment decorated with carefully selected French vintage furniture and objects. Its open kitchen, comfortable living space and private balcony make it ideal for a city break, a family trip or a longer stay.</p><p>The entire apartment is yours, with two separate bedrooms, a bathroom, living room, open kitchen and balcony.</p></div></section>
@@ -106,8 +116,8 @@
 <div class="feature"><svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/><path d="M11 12l10-10 2 2-3 3 2 2-3 3-2-2-3 3"/></svg><strong>Travel at your pace</strong><p>Self check-in, a secure building and convenient transport connections across Paris.</p></div>
 </div></section>
 <section class="stay-section stay-columns"><div><div class="eyebrow">Explore Paris</div><h2>Paris is just a metro ride away</h2></div><div><p>Located in Bagneux, just south of Paris, the apartment is only steps from Metro Line 4, with direct connections towards central Paris and convenient transfers to other lines.</p><p>Allow approximately 20 minutes to the Notre-Dame area and around 30 minutes for many central Paris destinations, depending on your route and traffic conditions.</p></div></section>
-<section class="stay-section stay-columns"><div><div class="eyebrow">Good to know</div><h2>Feel at home</h2></div><div><p>Entire private apartment · Self check-in · Check-in from 3:00 pm · Check-out by 11:00 am.</p><p>No parties or events. Please respect the neighbours and take care of the vintage furnishings and decor. Smoking is not permitted indoors.</p><p>Rates and availability are confirmed personally when you enquire. No online payment or instant booking is required on this website.</p></div></section>
-<section class="stay-book" id="enquire"><div class="eyebrow">Direct enquiries</div><h2>Plan your stay with us</h2><p>Tell us your arrival and departure dates and number of guests. We will reply personally with availability, rates and the next steps for your reservation.</p><a class="stay-button" target="_blank" rel="noopener noreferrer" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__">Enquire via WhatsApp</a><a class="stay-button secondary" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/collection.de.maman/">Message us on Instagram</a></section>
+<section class="stay-section stay-columns"><div><div class="eyebrow">Good to know</div><h2>Feel at home</h2></div><div><p>Entire private apartment · Self check-in · Check-in from 3:00 pm · Check-out by 11:00 am.</p><p>No parties or events. Please respect the neighbours and take care of the vintage furnishings and decor. Smoking is not permitted indoors.</p><p>Our direct rate is €180 per night, with cleaning included and a minimum stay of 2 nights. Any applicable tourist tax and the final availability will be confirmed before booking. No online payment or instant booking is required on this website.</p></div></section>
+<section class="stay-book" id="enquire"><div class="eyebrow">Direct enquiries</div><h2>Plan your stay with us</h2><p>€180 per night, cleaning included · Minimum 2 nights. Choose your dates above, then contact us directly. We will confirm availability, the final total and the next steps.</p><a class="stay-button" target="_blank" rel="noopener noreferrer" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__">Enquire via WhatsApp</a><a class="stay-button secondary" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/collection.de.maman/">Message us on Instagram</a></section>
 </main>
 <script>
 (() => {
@@ -121,6 +131,8 @@
   const wa = document.getElementById('cal-wa');
   const guests = document.getElementById('stay-guests');
   const initialWA = wa.href.split('?')[0];
+  const nightlyRate = 180;
+  const minimumNights = 2;
   // Use date part formatting to avoid timezone drift from Date.parse('YYYY-MM-DD').
   function localToday() {
     const parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
@@ -138,15 +150,19 @@
   function isBlocked(day){return blocked.some(r=>day>=r.start&&day<r.end);}
   function availableRange(start,end){for(let d=start;d<end;d=addDays(d,1)){if(isBlocked(d))return false;}return true;}
   function updateEnquiry(){
-    const selection = checkin && checkout ? `Check-in: ${checkin}; Check-out: ${checkout}; Guests: ${guests.value}.` : `Guests: ${guests.value}; preferred dates: please advise.`;
-    wa.href=initialWA+'?text='+encodeURIComponent('Hello! I would like to enquire about your Paris apartment. '+selection+' Could you please confirm availability and the total price?');
-    if(checkin && checkout){const nights=Math.round((asDate(checkout)-asDate(checkin))/86400000);summary.textContent=`${human(checkin)} → ${human(checkout)} · ${nights} night${nights===1?'':'s'} · ${guests.value} guest${guests.value==='1'?'':'s'} · awaiting host confirmation`;}
-    else if(checkin){summary.textContent=`Arrival: ${human(checkin)}. Now select your departure date.`;}
-    else summary.textContent=ready?'Select your arrival date, then your departure date.':'Availability could not be verified. Please enquire directly.';
+    const nights = checkin && checkout ? Math.round((asDate(checkout)-asDate(checkin))/86400000) : 0;
+    const validStay = ready && nights >= minimumNights;
+    const estimate = nights * nightlyRate;
+    const selection = validStay ? `Check-in: ${checkin}; Check-out: ${checkout}; Guests: ${guests.value}; ${nights} nights; estimated accommodation total: EUR ${estimate} (cleaning included).` : `Guests: ${guests.value}; preferred dates: please advise.`;
+    wa.href=initialWA+'?text='+encodeURIComponent('Hello! I would like to enquire about your Paris apartment. '+selection+' Please confirm availability and any applicable tourist tax.');
+    if(validStay){summary.textContent=`${human(checkin)} → ${human(checkout)} · ${nights} nights · ${guests.value} guests · estimated total €${estimate} (cleaning included; tourist tax, if applicable, extra)`;}
+    else if(checkin){summary.textContent=`Arrival: ${human(checkin)}. Select a checkout date at least ${minimumNights} nights later.`;}
+    else summary.textContent=ready?'Select your arrival date, then departure (minimum 2 nights).':'Availability could not be verified. Please enquire directly.';
   }
   function selectDay(day){
-    if(!ready || day<currentDay || (isBlocked(day) && !(checkin && !checkout && day>checkin && availableRange(checkin,day))))return;
+    if(!ready || day<currentDay || (isBlocked(day) && !(checkin && !checkout && day>=addDays(checkin,minimumNights) && availableRange(checkin,day))))return;
     if(!checkin || checkout || day<=checkin){checkin=day;checkout=null;}
+    else if(day<addDays(checkin,minimumNights)){status.textContent="Minimum stay is 2 nights. Choose a later checkout date.";}
     else if(availableRange(checkin,day)){checkout=day;}
     else {checkin=day;checkout=null;status.textContent='The selected period contains unavailable nights. Choose different dates.';}
     updateEnquiry();render();
@@ -163,7 +179,7 @@
     for(let d=1;d<=count;d++){
       const date=iso(y,m,d), past=date<currentDay, busy=ready&&isBlocked(date);
       const btn=document.createElement('button');btn.type='button';btn.className='calendar-day';btn.textContent=String(d);
-      const validCheckout = ready && checkin && !checkout && date>checkin && availableRange(checkin,date);
+      const validCheckout = ready && checkin && !checkout && date>=addDays(checkin,minimumNights) && availableRange(checkin,date);
       if(!ready || past || (busy && !validCheckout))btn.disabled=true;
       if(past)btn.classList.add('past');
       if(busy)btn.classList.add('blocked');
