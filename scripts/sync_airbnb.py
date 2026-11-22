@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import re
 import urllib.request
+import time
 
 URL = os.environ.get("AIRBNB_ICAL_URL", "")
 OUT = Path(__file__).resolve().parents[1] / "stay-availability.json"
@@ -53,12 +54,31 @@ def main():
     if parsed.scheme!='https' or not re.fullmatch(r'(?:[a-z0-9-]+\.)*airbnb\.(?:com|be|fr|de|es|it|co\.uk)',parsed.hostname or '',re.I) or not re.fullmatch(r'/calendar/ical/\d+\.ics',parsed.path):
         raise ValueError('AIRBNB_ICAL_URL secret is missing or invalid')
     req=urllib.request.Request(URL,headers={'User-Agent':'Mozilla/5.0','Accept':'text/calendar,text/plain'})
-    with urllib.request.urlopen(req,timeout=20) as r:
-        payload=r.read(1024*1024+1)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=25) as r:
+                payload = r.read(1024*1024+1)
+            break
+        except Exception:
+            if attempt == 2:
+                raise
+            time.sleep(4 * (attempt + 1))
     if len(payload)>1024*1024: raise ValueError('Calendar file too large')
     blocked,count=parse_ical(payload.decode('utf-8-sig'))
     now=dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds').replace('+00:00','Z')
     data={'calendarValid':True,'blocked':blocked,'eventCount':count,'refreshedAt':now}
+    # A successful poll with no booking changes should not rebuild the whole antiques site.
+    # Re-publish a timestamp at most every six hours so visitors see recent verification.
+    if OUT.exists():
+        try:
+            old=json.loads(OUT.read_text(encoding='utf-8'))
+            prior=dt.datetime.fromisoformat(old['refreshedAt'].replace('Z','+00:00'))
+            age=dt.datetime.now(dt.timezone.utc)-prior
+            if old.get('calendarValid') is True and old.get('blocked')==blocked and age < dt.timedelta(hours=6):
+                print('Calendar verified; occupied dates unchanged. Skipping unnecessary deployment.')
+                return
+        except (ValueError, TypeError, KeyError, OSError):
+            pass
     OUT.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'Updated {len(blocked)} blocked ranges from {count} Airbnb events at {now}')
 
