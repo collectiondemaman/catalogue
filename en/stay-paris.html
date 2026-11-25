@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stay in Paris | Vintage Apartment by Collection de Maman</title>
-<meta name="description" content="Stay near Paris in a charming 63 m² French vintage apartment with two bedrooms, a balcony and Metro line 4 just one minute away. Enquire directly via WhatsApp or Instagram.">
+<meta name="description" content="Stay near Paris in a charming 63 m² French vintage apartment with two bedrooms, a balcony and Metro line 4 just one minute away. Request a personal stay by email.">
 <style>
 :root{color-scheme:light;--ink:#2f2b27;--muted:#756d65;--line:#e8e2da;--cream:#f8f5f0}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65}a{color:inherit}
@@ -105,6 +105,30 @@
  .stay-detail-main .feature-icon{width:26px;height:26px;margin-bottom:7px}
 }
 @media(max-width:390px){.stay-detail-main .feature-grid{grid-template-columns:1fr}.stay-gallery{grid-template-rows:200px 74px}}
+
+/* Only the English Stay page: refined, mobile-first email enquiry. */
+.stay-detail-aside{position:static;top:auto}
+.stay-request-panel{border-top:1px solid var(--line);margin-top:16px;padding-top:22px}
+.stay-request-panel h3{font-family:Georgia,serif;font-size:26px;font-weight:400;line-height:1.2;margin:4px 0 9px}
+.stay-form-intro{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 17px}
+.stay-form-fields{display:grid;grid-template-columns:1fr;gap:12px}
+.stay-form-fields label{display:block;font-size:12px;font-weight:600;color:var(--ink)}
+.stay-form-fields label span{font-weight:400;color:var(--muted)}
+.stay-form-fields input,.stay-form-fields textarea{font:inherit;display:block;width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);padding:10px 12px;font-size:14px;margin-top:5px;min-width:0}
+.stay-form-fields input:focus,.stay-form-fields textarea:focus{outline:2px solid #c9b09b;outline-offset:0}
+.stay-form-fields textarea{resize:vertical;min-height:74px}
+.stay-form-dates{font-size:12px;color:#66594f;background:#faf7f3;border:1px solid var(--line);border-radius:6px;padding:9px 11px;margin:13px 0!important}
+.stay-form-consent{display:flex;align-items:flex-start;gap:8px;font-size:11px;line-height:1.55;color:var(--muted);margin:12px 0}
+.stay-form-consent input{margin:3px 0 0;flex:0 0 auto;accent-color:#304d40}
+.stay-send-request{display:block;width:100%;cursor:pointer;font:inherit;text-align:center;margin:0!important;min-height:45px}
+.stay-send-request:disabled{opacity:.45;cursor:not-allowed}
+.stay-form-error{color:#913e32;font-size:12px;margin:8px 0}
+.stay-honeypot{display:none!important}
+.stay-platform-option{display:grid;gap:4px;padding:15px 0 0;margin-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.stay-platform-option a{font-size:13px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;width:max-content}
+.stay-platform-option small{font-size:11px}
+@media(max-width:840px){.stay-detail-aside .calendar-shell{max-width:650px}.stay-request-panel{margin-top:20px}}
+@media(max-width:600px){.stay-request-panel{padding-top:18px}.stay-request-panel h3{font-size:24px}.stay-form-fields input,.stay-form-fields textarea{font-size:16px}.stay-send-request{min-height:49px}}
 </style>
 <script id="catalogue-analytics">
 (() => {
@@ -179,7 +203,7 @@
 <div class="stay-review-row"><div><div class="stay-review-stars" aria-label="5 out of 5 stars">★★★★★</div><div class="stay-review-rating">5.0 <span>/ 5 · 14 Airbnb reviews</span></div><div class="stay-review-sub">Guest favourite · Among the top 10% of eligible homes on Airbnb</div></div>
 <a class="stay-review-link" href="https://fr.airbnb.be/rooms/1701578875954347583" target="_blank" rel="noopener noreferrer">Read all 14 reviews on Airbnb ↗</a></div>
 <p class="stay-review-notes">Guests have particularly appreciated our vintage interiors, convenient metro access, cleanliness and attentive hosting.</p>
-<p class="stay-review-source">Rating and review count checked 21 November 2026. Reviews are hosted by Airbnb. For direct availability enquiries, please use WhatsApp or Instagram below.</p>
+<p class="stay-review-source">Rating and review count checked 21 November 2026. Reviews are hosted by Airbnb. To enquire directly, select dates and use the email form.</p>
 </section>
 
 <section class="stay-section stay-columns"><div><div class="eyebrow">The apartment</div><h2>A home with a story</h2></div><div><p>Step into a light-filled, peaceful 63 m² apartment decorated with carefully selected French vintage furniture and objects. Its open kitchen, comfortable living space and private balcony make it ideal for a city break, a family trip or a longer stay.</p><p>The entire apartment is yours, with two separate bedrooms, a bathroom, living room, open kitchen and balcony.</p></div></section>
@@ -193,7 +217,7 @@
 </div></section>
 <section class="stay-section stay-columns"><div><div class="eyebrow">Explore Paris</div><h2>Paris is just a metro ride away</h2></div><div><p>Located in Bagneux, just south of Paris, the apartment is only steps from Metro Line 4, with direct connections towards central Paris and convenient transfers to other lines.</p><p>Allow approximately 20 minutes to the Notre-Dame area and around 30 minutes for many central Paris destinations, depending on your route and traffic conditions.</p></div></section>
 <section class="stay-section stay-columns"><div><div class="eyebrow">Good to know</div><h2>Feel at home</h2></div><div><p>Entire private apartment · Self check-in · Check-in from 3:00 pm · Check-out by 11:00 am.</p><p>No parties or events. Please respect the neighbours and take care of the vintage furnishings and decor. Smoking is not permitted indoors.</p><p>Our direct rate is €180 per night, with cleaning included and a minimum stay of 2 nights. Any applicable tourist tax and the final availability will be confirmed before booking. No online payment or instant booking is required on this website.</p></div></section>
-<section class="stay-book" id="enquire"><div class="eyebrow">Direct enquiries</div><h2>Plan your stay with us</h2><p>€180 per night, cleaning included · Minimum 2 nights. Choose your dates above, then contact us directly. We will confirm availability, the final total and the next steps.</p><a class="stay-button" target="_blank" rel="noopener noreferrer" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__">Enquire via WhatsApp</a><a class="stay-button secondary" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/collection.de.maman/">Message us on Instagram</a></section>
+<section class="stay-book"><div class="eyebrow">Collection de Maman</div><h2>A private stay for vintage lovers</h2><p>A carefully collected home for those who appreciate antiques, thoughtful design and the quiet details of Parisian life. To request dates, use the email form beside the calendar.</p></section>
 </div><aside class="stay-detail-aside" aria-label="Booking availability"><section class="stay-section" id="availability" aria-labelledby="calendar-title">
   <div class="eyebrow">Check your dates</div>
   <h2 id="calendar-title">Availability calendar</h2>
@@ -210,8 +234,37 @@
     <p class="calendar-status" id="cal-status" role="status">Loading availability…</p>
     <div class="calendar-summary" id="cal-summary" aria-live="polite">Select arrival and departure dates (at least 2 nights).</div>
     <label class="stay-guests" for="stay-guests">Guests <select id="stay-guests"><option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option></select></label>
-    <div class="calendar-actions"><a class="stay-button" id="cal-wa" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__" target="_blank" rel="noopener noreferrer">Ask about these dates on WhatsApp</a><a class="stay-button secondary" href="https://www.instagram.com/collection.de.maman/" target="_blank" rel="noopener noreferrer">Enquire on Instagram</a></div>
-    <small>€180/night including cleaning. Minimum 2 nights; any applicable tourist tax is confirmed before booking. Bookings are by enquiry only. No online payment or instant booking. If the calendar cannot refresh, please contact us directly.</small>
+    <div class="calendar-actions" hidden><a id="cal-wa" href="https://wa.me/33648326911" aria-hidden="true" tabindex="-1"></a></div>
+    <div class="stay-request-panel" id="enquire">
+      <div class="eyebrow">A CURATED STAY</div>
+      <h3>Request your stay</h3>
+      <p class="stay-form-intro">For travellers who appreciate vintage interiors, antiques and a home with character. Tell us a little about your visit, and we will reply personally by email.</p>
+      <form id="stay-request-form" action="https://formsubmit.co/hello@collectiondemaman.com" method="POST" accept-charset="UTF-8">
+        <input type="hidden" name="_subject" value="Collection de Maman — New Paris stay request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://www.collectiondemaman.com/en/stay-paris.html?enquiry=sent#enquire">
+        <input type="hidden" name="_autoresponse" value="Hello, thank you for contacting Collection de Maman! We have received your stay request and will reply as soon as possible during our working hours in France (Paris time, CET/CEST). Please note that your reservation is not yet confirmed. No payment is required at this stage. Warm regards, Collection de Maman.">
+        <input type="text" name="_honey" class="stay-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="Check-in" id="stay-request-checkin">
+        <input type="hidden" name="Check-out" id="stay-request-checkout">
+        <input type="hidden" name="Guests" id="stay-request-guests">
+        <input type="hidden" name="Nights" id="stay-request-nights">
+        <input type="hidden" name="Estimated accommodation total" id="stay-request-total">
+        <input type="hidden" name="Source" value="www.collectiondemaman.com/en/stay-paris.html">
+        <div class="stay-form-fields">
+          <label>Full name <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="Your name" required></label>
+          <label>Email address <input type="email" name="email" autocomplete="email" maxlength="180" placeholder="you@example.com" required></label>
+          <label class="wide">A little about your trip <span>(optional)</span><textarea name="Message" maxlength="1000" rows="3" placeholder="What brings you to Paris?"></textarea></label>
+        </div>
+        <p id="stay-form-dates" class="stay-form-dates" role="status">Select your dates in the calendar above (minimum 2 nights).</p>
+        <label class="stay-form-consent"><input type="checkbox" required name="Privacy agreement" value="Agreed"> <span>I agree to have my details used to answer this stay request. The form is processed by FormSubmit, an external email delivery service. <a href="/en/privacy.html">Privacy information</a>.</span></label>
+        <button type="submit" id="stay-send-request" class="stay-button stay-send-request" disabled>Send stay request by email</button>
+        <p id="stay-form-error" class="stay-form-error" role="alert" hidden></p>
+        <small>No payment is taken. Your stay is only confirmed after we reply by email. Minimum stay: 2 nights.</small>
+      </form>
+      <div class="stay-platform-option"><span>Prefer a platform-managed booking?</span><a href="https://www.airbnb.fr/h/collectiondemaman" target="_blank" rel="noopener noreferrer">Book on Airbnb ↗</a><small>Platform prices and booking terms may differ.</small></div>
+    </div>
+    <small>€180/night including cleaning. Minimum 2 nights; any applicable tourist tax is confirmed before booking. Bookings are by enquiry only. No online payment or instant booking. If the calendar cannot refresh, dates remain unverified; please try again later.</small>
   </div>
 </section></aside></div></main>
 <script>
@@ -305,6 +358,63 @@
     updateEnquiry();render();
   }
   render();updateEnquiry();refresh();
+})();
+</script>
+<script id="stay-email-form-sync">
+(() => {
+  const form = document.getElementById('stay-request-form');
+  if (!form) return;
+  const send = document.getElementById('stay-send-request');
+  const dates = document.getElementById('stay-form-dates');
+  const error = document.getElementById('stay-form-error');
+  const summary = document.getElementById('cal-summary');
+  const calStatus = document.getElementById('cal-status');
+  const guests = document.getElementById('stay-guests');
+  const dayGrid = document.getElementById('cal-days');
+  const inputs = {start:document.getElementById('stay-request-checkin'),end:document.getElementById('stay-request-checkout'),guests:document.getElementById('stay-request-guests'),nights:document.getElementById('stay-request-nights'),total:document.getElementById('stay-request-total')};
+  let verified = false;
+  function refreshForm(){
+    // The calendar exposes dates in its human-readable summary. Only accept
+    // an actual two-date selection and a verified live calendar status.
+    const text = summary?.textContent || '';
+    const okay = (calStatus?.textContent || '').startsWith('Calendar checked:');
+    const match = text.match(/^(.+?)\s+→\s+(.+?)\s+·\s+(\d+) nights\s+·\s+(\d+) guests/);
+    const formattedDate = s => {
+      // Display uses en-GB e.g. "16 Dec 2026"; parse only this format.
+      const m = s.trim().match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})$/);
+      if (!m) return '';
+      const mi = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(m[2]);
+      return mi<0?'':`${m[3]}-${String(mi+1).padStart(2,'0')}-${m[1].padStart(2,'0')}`;
+    };
+    const start=match?formattedDate(match[1]):'';
+    const end=match?formattedDate(match[2]):'';
+    const n=match?Number(match[3]):0;
+    verified=Boolean(okay&&start&&end&&n>=2&&n<=365);
+    inputs.start.value=verified?start:'';
+    inputs.end.value=verified?end:'';
+    inputs.guests.value=guests?.value||'2';
+    inputs.nights.value=verified?String(n):'';
+    inputs.total.value=verified?`EUR ${n*180} (cleaning included, tourist tax if applicable extra)`:'';
+    send.disabled=!verified;
+    dates.textContent=verified?`${start} → ${end} · ${n} nights · ${inputs.guests.value} guests · €${n*180} estimated`:'Select arrival and departure dates on the calendar (minimum 2 nights).';
+  }
+  // One-time confirmation on return from the external email provider.
+  if(new URLSearchParams(location.search).get('enquiry')==='sent'){
+    const note=document.createElement('p');note.className='stay-form-dates';
+    note.textContent='Thank you. Your enquiry has been submitted. We will reply personally by email. Your booking is not yet confirmed.';
+    form.parentElement.insertBefore(note,form);
+  }
+  const obs=new MutationObserver(refreshForm);
+  if (summary) obs.observe(summary,{childList:true,characterData:true,subtree:true});
+  if (calStatus) obs.observe(calStatus,{childList:true,characterData:true,subtree:true});
+  if (dayGrid) dayGrid.addEventListener('click', () => queueMicrotask(refreshForm));
+  if (guests) guests.addEventListener('change',refreshForm);
+  form.addEventListener('submit',e=>{
+    refreshForm();
+    if(!verified){e.preventDefault();error.hidden=false;error.textContent='Please select a valid available stay of at least 2 nights first.';return;}
+    error.hidden=true;
+  });
+  refreshForm();
 })();
 </script>
 <footer class="stay-foot"><a href="/en/">Collection de Maman</a> · Vintage & antiques · Stay in Paris</footer></body></html>
