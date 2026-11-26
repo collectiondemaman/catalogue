@@ -301,6 +301,12 @@
     const nights = checkin && checkout ? Math.round((asDate(checkout)-asDate(checkin))/86400000) : 0;
     const validStay = ready && nights >= minimumNights;
     const estimate = nights * nightlyRate;
+    summary.dataset.stayStart = validStay ? checkin : '';
+    summary.dataset.stayEnd = validStay ? checkout : '';
+    summary.dataset.stayNights = validStay ? String(nights) : '';
+    summary.dataset.stayReady = ready ? '1' : '0';
+    window.__collectionStaySelection = { ready: validStay, start: validStay ? checkin : '', end: validStay ? checkout : '', nights: validStay ? nights : 0 };
+    document.dispatchEvent(new Event('collection:stay-selection'));
     const selection = validStay ? `Check-in: ${checkin}; Check-out: ${checkout}; Guests: ${guests.value}; ${nights} nights; estimated accommodation total: EUR ${estimate} (cleaning included).` : `Guests: ${guests.value}; preferred dates: please advise.`;
     wa.href=initialWA+'?text='+encodeURIComponent('Hello! I would like to enquire about your Paris apartment. '+selection+' Please confirm availability and any applicable tourist tax.');
     if(validStay){summary.textContent=`${human(checkin)} → ${human(checkout)} · ${nights} nights · ${guests.value} guests · estimated total €${estimate} (cleaning included; tourist tax, if applicable, extra)`;}
@@ -376,20 +382,12 @@
   function refreshForm(){
     // The calendar exposes dates in its human-readable summary. Only accept
     // an actual two-date selection and a verified live calendar status.
-    const text = summary?.textContent || '';
-    const okay = (calStatus?.textContent || '').startsWith('Calendar checked:');
-    const match = text.match(/^(.+?)\s+→\s+(.+?)\s+·\s+(\d+) nights\s+·\s+(\d+) guests/);
-    const formattedDate = s => {
-      // Display uses en-GB e.g. "16 Dec 2026"; parse only this format.
-      const m = s.trim().match(/^(\d{1,2})\s+([A-Za-z]{3})\s+(\d{4})$/);
-      if (!m) return '';
-      const mi = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(m[2]);
-      return mi<0?'':`${m[3]}-${String(mi+1).padStart(2,'0')}-${m[1].padStart(2,'0')}`;
-    };
-    const start=match?formattedDate(match[1]):'';
-    const end=match?formattedDate(match[2]):'';
-    const n=match?Number(match[3]):0;
-    verified=Boolean(okay&&start&&end&&n>=2&&n<=365);
+    const selection = window.__collectionStaySelection;
+    const start = selection?.start || summary?.dataset.stayStart || '';
+    const end = selection?.end || summary?.dataset.stayEnd || '';
+    const n = Number(selection?.nights || summary?.dataset.stayNights || 0);
+    const okay = selection ? selection.ready === true : summary?.dataset.stayReady === '1';
+    verified = Boolean(okay && /^\d{4}-\d{2}-\d{2}$/.test(start) && /^\d{4}-\d{2}-\d{2}$/.test(end) && n>=2 && n<=365);
     inputs.start.value=verified?start:'';
     inputs.end.value=verified?end:'';
     inputs.guests.value=guests?.value||'2';
@@ -404,15 +402,44 @@
     note.textContent='Thank you. Your enquiry has been submitted. We will reply personally by email. Your booking is not yet confirmed.';
     form.parentElement.insertBefore(note,form);
   }
+  document.addEventListener('collection:stay-selection',refreshForm);
   const obs=new MutationObserver(refreshForm);
   if (summary) obs.observe(summary,{childList:true,characterData:true,subtree:true});
   if (calStatus) obs.observe(calStatus,{childList:true,characterData:true,subtree:true});
   if (dayGrid) dayGrid.addEventListener('click', () => queueMicrotask(refreshForm));
   if (guests) guests.addEventListener('change',refreshForm);
-  form.addEventListener('submit',e=>{
+  let sending = false;
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(sending) return;
     refreshForm();
-    if(!verified){e.preventDefault();error.hidden=false;error.textContent='Please select a valid available stay of at least 2 nights first.';return;}
-    error.hidden=true;
+    if(!verified){error.hidden=false;error.textContent='Please select a valid available stay of at least 2 nights first.';return;}
+    if(!form.reportValidity()) return;
+    sending=true;
+    send.disabled=true;
+    const originalLabel=send.textContent;
+    send.textContent='Sending…';
+    error.hidden=false;
+    error.style.color='#66594f';
+    error.textContent='Sending your request. Please keep this page open.';
+    try {
+      const response=await fetch('https://formsubmit.co/ajax/hello@collectiondemaman.com',{
+        method:'POST',body:new FormData(form),headers:{Accept:'application/json'}
+      });
+      const payload=await response.json().catch(()=>({}));
+      if(!response.ok || payload.success===false || payload.success==='false')
+        throw new Error(payload.message || 'Email service rejected the request.');
+      error.style.color='#294d40';
+      error.textContent='Your request has been sent. We will reply by email. Your stay is not yet confirmed.';
+      form.querySelectorAll('input:not([type=hidden]),textarea').forEach(el=>{if(el.type!=='checkbox')el.disabled=true;});
+      send.textContent='Request sent';
+      return;
+    } catch (err) {
+      error.style.color='#913e32';
+      error.textContent='The request could not be sent. Please email hello@collectiondemaman.com directly or try again. ' + (err?.message||'');
+      send.disabled=false;
+      send.textContent=originalLabel;
+    } finally {sending=false;}
   });
   refreshForm();
 })();

@@ -105,6 +105,30 @@
  .stay-detail-main .feature-icon{width:26px;height:26px;margin-bottom:7px}
 }
 @media(max-width:390px){.stay-detail-main .feature-grid{grid-template-columns:1fr}.stay-gallery{grid-template-rows:200px 74px}}
+
+/* Only the English Stay page: refined, mobile-first email enquiry. */
+.stay-detail-aside{position:static;top:auto}
+.stay-request-panel{border-top:1px solid var(--line);margin-top:16px;padding-top:22px}
+.stay-request-panel h3{font-family:Georgia,serif;font-size:26px;font-weight:400;line-height:1.2;margin:4px 0 9px}
+.stay-form-intro{font-size:13px;line-height:1.55;color:var(--muted);margin:0 0 17px}
+.stay-form-fields{display:grid;grid-template-columns:1fr;gap:12px}
+.stay-form-fields label{display:block;font-size:12px;font-weight:600;color:var(--ink)}
+.stay-form-fields label span{font-weight:400;color:var(--muted)}
+.stay-form-fields input,.stay-form-fields textarea{font:inherit;display:block;width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);padding:10px 12px;font-size:14px;margin-top:5px;min-width:0}
+.stay-form-fields input:focus,.stay-form-fields textarea:focus{outline:2px solid #c9b09b;outline-offset:0}
+.stay-form-fields textarea{resize:vertical;min-height:74px}
+.stay-form-dates{font-size:12px;color:#66594f;background:#faf7f3;border:1px solid var(--line);border-radius:6px;padding:9px 11px;margin:13px 0!important}
+.stay-form-consent{display:flex;align-items:flex-start;gap:8px;font-size:11px;line-height:1.55;color:var(--muted);margin:12px 0}
+.stay-form-consent input{margin:3px 0 0;flex:0 0 auto;accent-color:#304d40}
+.stay-send-request{display:block;width:100%;cursor:pointer;font:inherit;text-align:center;margin:0!important;min-height:45px}
+.stay-send-request:disabled{opacity:.45;cursor:not-allowed}
+.stay-form-error{color:#913e32;font-size:12px;margin:8px 0}
+.stay-honeypot{display:none!important}
+.stay-platform-option{display:grid;gap:4px;padding:15px 0 0;margin-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.stay-platform-option a{font-size:13px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;width:max-content}
+.stay-platform-option small{font-size:11px}
+@media(max-width:840px){.stay-detail-aside .calendar-shell{max-width:650px}.stay-request-panel{margin-top:20px}}
+@media(max-width:600px){.stay-request-panel{padding-top:18px}.stay-request-panel h3{font-size:24px}.stay-form-fields input,.stay-form-fields textarea{font-size:16px}.stay-send-request{min-height:49px}}
 </style>
 <script id="catalogue-analytics">
 (() => {
@@ -179,7 +203,7 @@
 <div class="stay-review-row"><div><div class="stay-review-stars" aria-label="5点満点中5点">★★★★★</div><div class="stay-review-rating">5.0 <span>/ 5 · Airbnb口コミ14件</span></div><div class="stay-review-sub">ゲストチョイス · Airbnbの対象宿泊施設の上位10％</div></div>
 <a class="stay-review-link" href="https://fr.airbnb.be/rooms/1701578875954347583" target="_blank" rel="noopener noreferrer">Airbnbで口コミ14件を見る ↗</a></div>
 <p class="stay-review-notes">ヴィンテージ感のあるインテリア、地下鉄へのアクセス、清潔さ、丁寧な対応が特に好評です。</p>
-<p class="stay-review-source">評価と口コミ件数は2026年11月21日時点の情報です。口コミの原文はAirbnbでご確認ください。直接のお問い合わせは下記WhatsAppまたはInstagramをご利用ください。</p>
+<p class="stay-review-source">評価と口コミ件数は2026年11月21日時点の情報です。口コミの原文はAirbnbでご確認ください。直接のお問い合わせは日付を選び、メールフォームをご利用ください。</p>
 </section>
 
 <section class="stay-section stay-columns"><div><div class="eyebrow">アパートメント</div><h2>物語のある住まい</h2></div><div><p>フランスのヴィンテージ家具や小物でしつらえた、明るく静かな63㎡のアパートメントです。オープンキッチン、くつろげるリビング、専用バルコニーがあり、観光や家族旅行、長めの滞在にも適しています。</p><p>アパートメントをまるごと貸切でご利用いただけます。独立した寝室2室、バスルーム、リビング、オープンキッチン、バルコニーがあります。</p></div></section>
@@ -193,7 +217,7 @@
 </div></section>
 <section class="stay-section stay-columns"><div><div class="eyebrow">パリを楽しむ</div><h2>地下鉄で気軽にパリ中心部へ</h2></div><div><p>アパートメントはパリ南側のBagneuxに位置し、地下鉄4号線の駅がすぐ近くです。パリ中心部へ直通でアクセスでき、他路線への乗り換えも便利です。</p><p>ノートルダム周辺へは約20分、パリ中心部の多くの目的地へは約30分が目安です。経路や運行状況により異なります。</p></div></section>
 <section class="stay-section stay-columns"><div><div class="eyebrow">ご滞在にあたって</div><h2>ご自宅のように</h2></div><div><p>アパートメント貸切 · セルフチェックイン · チェックイン15:00以降 · チェックアウト11:00まで。</p><p>パーティーやイベントはご遠慮ください。近隣へのご配慮と、ヴィンテージ家具・装飾品の丁寧なお取り扱いをお願いします。室内は禁煙です。</p><p>直接予約の料金は1泊€180（清掃料金込み）、最低2泊です。宿泊税がある場合や空室の最終確認については、予約確定前にご案内します。このサイトではオンライン決済や即時予約は行っていません。</p></div></section>
-<section class="stay-book" id="enquire"><div class="eyebrow">直接お問い合わせ</div><h2>ご旅行の日程をご相談ください</h2><p>1泊€180（清掃料金込み）・最低2泊。上のカレンダーで日程を選んでから直接お問い合わせください。空室、最終料金、予約方法をご案内します。</p><a class="stay-button" target="_blank" rel="noopener noreferrer" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__">WhatsAppで問い合わせる</a><a class="stay-button secondary" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/collection.de.maman/">Instagramでメッセージ</a></section>
+<section class="stay-book"><div class="eyebrow">Collection de Maman</div><h2>ヴィンテージ好きのためのプライベートステイ</h2><p>アンティークや丁寧なデザイン、パリの日常を楽しむ方のための住まい。宿泊希望日はカレンダー横のメールフォームからお問い合わせください。</p></section>
 </div><aside class="stay-detail-aside" aria-label="Booking availability"><section class="stay-section" id="availability" aria-labelledby="calendar-title">
   <div class="eyebrow">日程を確認</div>
   <h2 id="calendar-title">空室カレンダー</h2>
@@ -210,7 +234,36 @@
     <p class="calendar-status" id="cal-status" role="status">空室状況を読み込んでいます…</p>
     <div class="calendar-summary" id="cal-summary" aria-live="polite">チェックイン・チェックアウト日を選択してください（2泊以上）。</div>
     <label class="stay-guests" for="stay-guests">宿泊人数<select id="stay-guests"><option value="1">1名</option><option value="2" selected>2名</option><option value="3">3名</option><option value="4">4名</option></select></label>
-    <div class="calendar-actions"><a class="stay-button" id="cal-wa" href="https://wa.me/33648326911?text=Hello%21%20I%20am%20interested%20in%20your%20Paris%20apartment.%20Could%20you%20please%20confirm%20availability%20and%20the%20price%20for%20my%20dates%3F%20Check-in%3A%20__%20%2F%20Check-out%3A%20__%20%2F%20Guests%3A%20__" target="_blank" rel="noopener noreferrer">WhatsAppで空室を問い合わせる</a><a class="stay-button secondary" href="https://www.instagram.com/collection.de.maman/" target="_blank" rel="noopener noreferrer">Instagramで問い合わせる</a></div>
+    <div class="calendar-actions" hidden><a id="cal-wa" href="https://wa.me/33648326911" aria-hidden="true" tabindex="-1"></a></div>
+    <div class="stay-request-panel" id="enquire">
+      <div class="eyebrow">こだわりのヴィンテージ滞在</div>
+      <h3>宿泊リクエスト</h3>
+      <p class="stay-form-intro">ヴィンテージ家具やアンティークを愛する旅人のための特別な空間です。ご旅行について少しお知らせください。メールでご返信いたします。</p>
+      <form id="stay-request-form" action="https://formsubmit.co/hello@collectiondemaman.com" method="POST" accept-charset="UTF-8">
+        <input type="hidden" name="_subject" value="Collection de Maman — New Paris stay request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://www.collectiondemaman.com/ja/stay-paris.html?enquiry=sent#enquire">
+        <input type="hidden" name="_autoresponse" value="Hello, thank you for contacting Collection de Maman! We have received your stay request and will reply as soon as possible during our working hours in France (Paris time, CET/CEST). Please note that your reservation is not yet confirmed. No payment is required at this stage. Warm regards, Collection de Maman.">
+        <input type="text" name="_honey" class="stay-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="Check-in" id="stay-request-checkin">
+        <input type="hidden" name="Check-out" id="stay-request-checkout">
+        <input type="hidden" name="Guests" id="stay-request-guests">
+        <input type="hidden" name="Nights" id="stay-request-nights">
+        <input type="hidden" name="Estimated accommodation total" id="stay-request-total">
+        <input type="hidden" name="Source" value="www.collectiondemaman.com/ja/stay-paris.html">
+        <div class="stay-form-fields">
+          <label>お名前 <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="お名前" required></label>
+          <label>メールアドレス <input type="email" name="email" autocomplete="email" maxlength="180" placeholder="you@example.com" required></label>
+          <label class="wide">ご旅行について <span>（任意）</span><textarea name="Message" maxlength="1000" rows="3" placeholder="パリへのご旅行についてお聞かせください。"></textarea></label>
+        </div>
+        <p id="stay-form-dates" class="stay-form-dates" role="status">カレンダーでチェックイン日とチェックアウト日を選択してください（最低2泊）。</p>
+        <label class="stay-form-consent"><input type="checkbox" required name="Privacy agreement" value="Agreed"> <span>宿泊リクエストへの返信のために個人情報を利用することに同意します。フォーム送信には外部サービスのFormSubmitを使用します。 <a href="/en/privacy.html">プライバシーについて</a>.</span></label>
+        <button type="submit" id="stay-send-request" class="stay-button stay-send-request" disabled>メールで宿泊をリクエスト</button>
+        <p id="stay-form-error" class="stay-form-error" role="alert" hidden></p>
+        <small>このフォームでは決済は行いません。メールでの返信後に予約が確定します。最低2泊から。</small>
+      </form>
+      <div class="stay-platform-option"><span>予約サイトでのご予約をご希望ですか？</span><a href="https://www.airbnb.fr/h/collectiondemaman" target="_blank" rel="noopener noreferrer">Airbnbで予約 ↗</a><small>プラットフォームによって料金や予約条件が異なる場合があります。</small></div>
+    </div>
     <small>1泊€180（清掃料金込み）、最低2泊。宿泊税がある場合は予約前にお知らせします。予約はお問い合わせ後に確定します。オンライン決済・即時予約はありません。カレンダーが更新できない場合は直接ご連絡ください。</small>
   </div>
 </section></aside></div></main>
@@ -249,6 +302,12 @@
     const nights = checkin && checkout ? Math.round((asDate(checkout)-asDate(checkin))/86400000) : 0;
     const validStay = ready && nights >= minimumNights;
     const estimate = nights * nightlyRate;
+    summary.dataset.stayStart = validStay ? checkin : '';
+    summary.dataset.stayEnd = validStay ? checkout : '';
+    summary.dataset.stayNights = validStay ? String(nights) : '';
+    summary.dataset.stayReady = ready ? '1' : '0';
+    window.__collectionStaySelection = { ready: validStay, start: validStay ? checkin : '', end: validStay ? checkout : '', nights: validStay ? nights : 0 };
+    document.dispatchEvent(new Event('collection:stay-selection'));
     const selection = validStay ? `${tr.rangeStart}: ${checkin}; ${tr.rangeEnd}: ${checkout}; ${tr.guests}: ${guests.value}; ${nights}${tr.nights}; ${tr.total}: EUR ${estimate} (${tr.included}).` : `${tr.guests}: ${guests.value}; ${tr.datesAsk}`;
     wa.href=initialWA+'?text='+encodeURIComponent(tr.waStart+' '+selection+' '+tr.waEnd);
     if(validStay){summary.textContent=`${human(checkin)} → ${human(checkout)} · ${nights}${tr.nights} · ${guests.value}${tr.guests} · ${tr.total} €${estimate} (${tr.included})`;}
@@ -306,6 +365,84 @@
     updateEnquiry();render();
   }
   render();updateEnquiry();refresh();
+})();
+</script>
+<script id="stay-email-form-sync">
+(() => {
+  const form = document.getElementById('stay-request-form');
+  if (!form) return;
+  const send = document.getElementById('stay-send-request');
+  const dates = document.getElementById('stay-form-dates');
+  const error = document.getElementById('stay-form-error');
+  const summary = document.getElementById('cal-summary');
+  const calStatus = document.getElementById('cal-status');
+  const guests = document.getElementById('stay-guests');
+  const dayGrid = document.getElementById('cal-days');
+  const inputs = {start:document.getElementById('stay-request-checkin'),end:document.getElementById('stay-request-checkout'),guests:document.getElementById('stay-request-guests'),nights:document.getElementById('stay-request-nights'),total:document.getElementById('stay-request-total')};
+  let verified = false;
+  function refreshForm(){
+    // The calendar exposes dates in its human-readable summary. Only accept
+    // an actual two-date selection and a verified live calendar status.
+    const selection = window.__collectionStaySelection;
+    const start = selection?.start || summary?.dataset.stayStart || '';
+    const end = selection?.end || summary?.dataset.stayEnd || '';
+    const n = Number(selection?.nights || summary?.dataset.stayNights || 0);
+    const okay = selection ? selection.ready === true : summary?.dataset.stayReady === '1';
+    verified = Boolean(okay && /^\d{4}-\d{2}-\d{2}$/.test(start) && /^\d{4}-\d{2}-\d{2}$/.test(end) && n>=2 && n<=365);
+    inputs.start.value=verified?start:'';
+    inputs.end.value=verified?end:'';
+    inputs.guests.value=guests?.value||'2';
+    inputs.nights.value=verified?String(n):'';
+    inputs.total.value=verified?`EUR ${n*180} (cleaning included, tourist tax if applicable extra)`:'';
+    send.disabled=!verified;
+    dates.textContent=verified?`${start} → ${end} · ${n} 泊 · ${inputs.guests.value} 名 · €${n*180} 概算`:'カレンダーでチェックイン日とチェックアウト日を選択してください（最低2泊）。';
+  }
+  // One-time confirmation on return from the external email provider.
+  if(new URLSearchParams(location.search).get('enquiry')==='sent'){
+    const note=document.createElement('p');note.className='stay-form-dates';
+    note.textContent='お問い合わせを受け付けました。メールでご返信いたします。予約はまだ確定していません。';
+    form.parentElement.insertBefore(note,form);
+  }
+  document.addEventListener('collection:stay-selection',refreshForm);
+  const obs=new MutationObserver(refreshForm);
+  if (summary) obs.observe(summary,{childList:true,characterData:true,subtree:true});
+  if (calStatus) obs.observe(calStatus,{childList:true,characterData:true,subtree:true});
+  if (dayGrid) dayGrid.addEventListener('click', () => queueMicrotask(refreshForm));
+  if (guests) guests.addEventListener('change',refreshForm);
+  let sending = false;
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(sending) return;
+    refreshForm();
+    if(!verified){error.hidden=false;error.textContent='最初に2泊以上の宿泊日程を選択してください。';return;}
+    if(!form.reportValidity()) return;
+    sending=true;
+    send.disabled=true;
+    const originalLabel=send.textContent;
+    send.textContent='Sending…';
+    error.hidden=false;
+    error.style.color='#66594f';
+    error.textContent='Sending your request. Please keep this page open.';
+    try {
+      const response=await fetch('https://formsubmit.co/ajax/hello@collectiondemaman.com',{
+        method:'POST',body:new FormData(form),headers:{Accept:'application/json'}
+      });
+      const payload=await response.json().catch(()=>({}));
+      if(!response.ok || payload.success===false || payload.success==='false')
+        throw new Error(payload.message || 'Email service rejected the request.');
+      error.style.color='#294d40';
+      error.textContent='Your request has been sent. We will reply by email. Your stay is not yet confirmed.';
+      form.querySelectorAll('input:not([type=hidden]),textarea').forEach(el=>{if(el.type!=='checkbox')el.disabled=true;});
+      send.textContent='Request sent';
+      return;
+    } catch (err) {
+      error.style.color='#913e32';
+      error.textContent='The request could not be sent. Please email hello@collectiondemaman.com directly or try again. ' + (err?.message||'');
+      send.disabled=false;
+      send.textContent=originalLabel;
+    } finally {sending=false;}
+  });
+  refreshForm();
 })();
 </script>
 <footer class="stay-foot"><a href="/en/">Collection de Maman</a>· ヴィンテージ＆アンティーク · パリ滞在</footer></body></html>
