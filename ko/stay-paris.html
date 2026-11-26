@@ -129,6 +129,18 @@
 .stay-platform-option small{font-size:11px}
 @media(max-width:840px){.stay-detail-aside .calendar-shell{max-width:650px}.stay-request-panel{margin-top:20px}}
 @media(max-width:600px){.stay-request-panel{padding-top:18px}.stay-request-panel h3{font-size:24px}.stay-form-fields input,.stay-form-fields textarea{font-size:16px}.stay-send-request{min-height:49px}}
+
+/* Booking dates, visible and independently editable on desktop and mobile. */
+.stay-date-picker-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid #c8bdb1;border-radius:10px;overflow:hidden;margin:4px 0 0;background:#fff}
+.stay-date-picker-row label{display:block;min-width:0;padding:9px 11px 8px;cursor:pointer}
+.stay-date-picker-row label+label{border-left:1px solid #c8bdb1}
+.stay-date-picker-row label span{display:block;color:#756d65;letter-spacing:.07em;font-weight:700;font-size:10px}
+.stay-date-picker-row input{display:block;margin-top:5px;width:100%;min-width:0;border:0;background:transparent;color:#2f2b27;font:600 13px/1.4 system-ui,-apple-system,sans-serif;color-scheme:light}
+.stay-date-picker-row input:focus-visible{outline:2px solid #294d40;outline-offset:1px}
+.stay-date-help{margin:7px 0 14px!important;font-size:12px;color:#756d65}
+.stay-send-request:disabled{opacity:1;cursor:progress}
+.stay-form-error a{display:inline-block;margin-top:8px;text-decoration:underline;font-weight:600}
+@media(max-width:390px){.stay-date-picker-row label{padding:9px 7px}.stay-date-picker-row input{font-size:12px}}
 </style>
 <script id="catalogue-analytics">
 (() => {
@@ -251,6 +263,11 @@
         <input type="hidden" name="Nights" id="stay-request-nights">
         <input type="hidden" name="Estimated accommodation total" id="stay-request-total">
         <input type="hidden" name="Source" value="www.collectiondemaman.com/ko/stay-paris.html">
+        <div class="stay-date-picker-row" aria-label="Stay dates">
+          <label for="stay-dates-start"><span>체크인</span><input id="stay-dates-start" type="date" required aria-label="체크인"></label>
+          <label for="stay-dates-end"><span>체크아웃</span><input id="stay-dates-end" type="date" required aria-label="체크아웃"></label>
+        </div>
+        <p class="stay-date-help">날짜 입력란이나 달력에서 일정을 선택하세요.</p>
         <div class="stay-form-fields">
           <label>성함 <input type="text" name="name" autocomplete="name" maxlength="120" placeholder="성함" required></label>
           <label>이메일 주소 <input type="email" name="email" autocomplete="email" maxlength="180" placeholder="you@example.com" required></label>
@@ -300,13 +317,13 @@
   function availableRange(start,end){for(let d=start;d<end;d=addDays(d,1)){if(isBlocked(d))return false;}return true;}
   function updateEnquiry(){
     const nights = checkin && checkout ? Math.round((asDate(checkout)-asDate(checkin))/86400000) : 0;
-    const validStay = ready && nights >= minimumNights;
+    const validStay = ready && nights >= minimumNights && availableRange(checkin,checkout);
     const estimate = nights * nightlyRate;
     summary.dataset.stayStart = validStay ? checkin : '';
     summary.dataset.stayEnd = validStay ? checkout : '';
     summary.dataset.stayNights = validStay ? String(nights) : '';
     summary.dataset.stayReady = ready ? '1' : '0';
-    window.__collectionStaySelection = { ready: validStay, start: validStay ? checkin : '', end: validStay ? checkout : '', nights: validStay ? nights : 0 };
+    window.__collectionStaySelection = { ready: ready, start: checkin || '', end: checkout || '', nights: nights, blocked: blocked.map(r => ({start:r.start,end:r.end})) };
     document.dispatchEvent(new Event('collection:stay-selection'));
     const selection = validStay ? `${tr.rangeStart}: ${checkin}; ${tr.rangeEnd}: ${checkout}; ${tr.guests}: ${guests.value}; ${nights}${tr.nights}; ${tr.total}: EUR ${estimate} (${tr.included}).` : `${tr.guests}: ${guests.value}; ${tr.datesAsk}`;
     wa.href=initialWA+'?text='+encodeURIComponent(tr.waStart+' '+selection+' '+tr.waEnd);
@@ -318,10 +335,18 @@
     if(!ready || day<currentDay || (isBlocked(day) && !(checkin && !checkout && day>=addDays(checkin,minimumNights) && availableRange(checkin,day))))return;
     if(!checkin || checkout || day<=checkin){checkin=day;checkout=null;}
     else if(day<addDays(checkin,minimumNights)){status.textContent=tr.minimum;}
-    else if(availableRange(checkin,day)){checkout=day;}
+    else if(availableRange(checkin,day)){checkout=day;status.textContent='선택한 날짜에 대해 문의할 수 있습니다. 최종 확인이 필요합니다.';}
     else {checkin=day;checkout=null;status.textContent=tr.invalid;}
     updateEnquiry();render();
   }
+  window.collectionStaySetDates = function(start,end){
+    if(!start){checkin=null;checkout=null;updateEnquiry();render();return;}
+    // Even if the calendar cannot refresh, preserve the visitor's requested dates as an enquiry.
+    checkin=start;
+    checkout=end || null;
+    if(ready && checkout && !availableRange(checkin,checkout)) checkout=null;
+    updateEnquiry();render();
+  };
   function render(){
     const [y,m]=month.split('-').map(Number);
     const maxMonth=nextMonth(firstMonth,11);
@@ -369,80 +394,82 @@
 </script>
 <script id="stay-email-form-sync">
 (() => {
-  const form = document.getElementById('stay-request-form');
-  if (!form) return;
-  const send = document.getElementById('stay-send-request');
-  const dates = document.getElementById('stay-form-dates');
-  const error = document.getElementById('stay-form-error');
-  const summary = document.getElementById('cal-summary');
-  const calStatus = document.getElementById('cal-status');
-  const guests = document.getElementById('stay-guests');
-  const dayGrid = document.getElementById('cal-days');
-  const inputs = {start:document.getElementById('stay-request-checkin'),end:document.getElementById('stay-request-checkout'),guests:document.getElementById('stay-request-guests'),nights:document.getElementById('stay-request-nights'),total:document.getElementById('stay-request-total')};
-  let verified = false;
-  function refreshForm(){
-    // The calendar exposes dates in its human-readable summary. Only accept
-    // an actual two-date selection and a verified live calendar status.
-    const selection = window.__collectionStaySelection;
-    const start = selection?.start || summary?.dataset.stayStart || '';
-    const end = selection?.end || summary?.dataset.stayEnd || '';
-    const n = Number(selection?.nights || summary?.dataset.stayNights || 0);
-    const okay = selection ? selection.ready === true : summary?.dataset.stayReady === '1';
-    verified = Boolean(okay && /^\d{4}-\d{2}-\d{2}$/.test(start) && /^\d{4}-\d{2}-\d{2}$/.test(end) && n>=2 && n<=365);
-    inputs.start.value=verified?start:'';
-    inputs.end.value=verified?end:'';
-    inputs.guests.value=guests?.value||'2';
-    inputs.nights.value=verified?String(n):'';
-    inputs.total.value=verified?`EUR ${n*180} (cleaning included, tourist tax if applicable extra)`:'';
-    send.disabled=!verified;
-    dates.textContent=verified?`${start} → ${end} · ${n} 박 · ${inputs.guests.value} 명 · €${n*180} 예상 금액`:'달력에서 체크인 및 체크아웃 날짜를 선택하세요(최소 2박).';
-  }
-  // One-time confirmation on return from the external email provider.
-  if(new URLSearchParams(location.search).get('enquiry')==='sent'){
-    const note=document.createElement('p');note.className='stay-form-dates';
-    note.textContent='문의가 접수되었습니다. 이메일로 직접 답변드리겠습니다. 아직 예약이 확정된 것은 아닙니다.';
-    form.parentElement.insertBefore(note,form);
-  }
-  document.addEventListener('collection:stay-selection',refreshForm);
-  const obs=new MutationObserver(refreshForm);
-  if (summary) obs.observe(summary,{childList:true,characterData:true,subtree:true});
-  if (calStatus) obs.observe(calStatus,{childList:true,characterData:true,subtree:true});
-  if (dayGrid) dayGrid.addEventListener('click', () => queueMicrotask(refreshForm));
-  if (guests) guests.addEventListener('change',refreshForm);
-  let sending = false;
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();
-    if(sending) return;
-    refreshForm();
-    if(!verified){error.hidden=false;error.textContent='먼저 2박 이상의 예약 가능한 날짜를 선택해 주세요.';return;}
-    if(!form.reportValidity()) return;
-    sending=true;
-    send.disabled=true;
-    const originalLabel=send.textContent;
-    send.textContent='Sending…';
-    error.hidden=false;
-    error.style.color='#66594f';
-    error.textContent='Sending your request. Please keep this page open.';
-    try {
-      const response=await fetch('https://formsubmit.co/ajax/hello@collectiondemaman.com',{
-        method:'POST',body:new FormData(form),headers:{Accept:'application/json'}
-      });
-      const payload=await response.json().catch(()=>({}));
-      if(!response.ok || payload.success===false || payload.success==='false')
-        throw new Error(payload.message || 'Email service rejected the request.');
-      error.style.color='#294d40';
-      error.textContent='Your request has been sent. We will reply by email. Your stay is not yet confirmed.';
-      form.querySelectorAll('input:not([type=hidden]),textarea').forEach(el=>{if(el.type!=='checkbox')el.disabled=true;});
-      send.textContent='Request sent';
-      return;
-    } catch (err) {
-      error.style.color='#913e32';
-      error.textContent='The request could not be sent. Please email hello@collectiondemaman.com directly or try again. ' + (err?.message||'');
-      send.disabled=false;
-      send.textContent=originalLabel;
-    } finally {sending=false;}
-  });
-  refreshForm();
+ const form=document.getElementById('stay-request-form'); if(!form)return;
+ const startInput=document.getElementById('stay-dates-start');
+ const endInput=document.getElementById('stay-dates-end');
+ const send=document.getElementById('stay-send-request');
+ const note=document.getElementById('stay-form-dates');
+ const feedback=document.getElementById('stay-form-error');
+ const guests=document.getElementById('stay-guests');
+ const fields={start:document.getElementById('stay-request-checkin'),end:document.getElementById('stay-request-checkout'),guests:document.getElementById('stay-request-guests'),nights:document.getElementById('stay-request-nights'),total:document.getElementById('stay-request-total')};
+ const labels={"arrival": "체크인", "departure": "체크아웃", "help": "날짜 입력란이나 달력에서 일정을 선택하세요.", "select": "체크인과 체크아웃 날짜를 모두 선택해 주세요.", "min": "최소 2박 이상 선택해 주세요.", "past": "미래의 체크인 날짜를 선택해 주세요.", "blocked": "선택한 기간에 예약 불가 날짜가 있습니다.", "unverified": "현재 달력을 확인할 수 없습니다. 문의는 가능하지만 예약은 미확정입니다.", "ready": "선택한 날짜에 대해 문의할 수 있습니다. 최종 확인이 필요합니다.", "sending": "전송 중…", "success": "숙박 요청을 보냈습니다. 이메일로 답변드리겠습니다. 예약은 아직 확정되지 않았습니다.", "fail": "이메일 전송에 실패했습니다. hello@collectiondemaman.com으로 직접 문의해 주세요.", "email": "이메일로 문의하기", "total": "예상 금액 · 청소비 포함", "selectstatus": "체크인과 체크아웃 날짜를 선택하세요."};
+ const today=()=>{const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const g=x=>p.find(v=>v.type===x).value;return `${g('year')}-${g('month')}-${g('day')}`;};
+ function validISO(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const d=new Date(v+'T12:00:00Z');return !isNaN(d.getTime())&&d.toISOString().slice(0,10)===v;}
+ function nights(a,b){return Math.round((Date.parse(b+'T12:00:00Z')-Date.parse(a+'T12:00:00Z'))/86400000);}
+ function hasConflict(a,b){const s=window.__collectionStaySelection;if(!s||s.ready!==true)return false;return (s.blocked||[]).some(r=>a<r.end&&b>r.start);}
+ let lastError='';
+ function show(msg,isError=false){feedback.hidden=!msg;feedback.textContent=msg||'';feedback.style.color=isError?'#913e32':'#66594f';}
+ function validate(){
+   const a=startInput.value,b=endInput.value;
+   if(!validISO(a)||!validISO(b))return {ok:false,msg:labels.select};
+   if(a<today())return {ok:false,msg:labels.past};
+   const n=nights(a,b);
+   if(n<2||n>365)return {ok:false,msg:labels.min};
+   if(hasConflict(a,b))return {ok:false,msg:labels.blocked};
+   return {ok:true,n};
+ }
+ function refresh(){
+   const a=startInput.value,b=endInput.value;
+   startInput.min=today();
+   endInput.min=a||today();
+   const v=validate();
+   fields.start.value=v.ok?a:'';fields.end.value=v.ok?b:'';
+   fields.guests.value=guests.value;fields.nights.value=v.ok?String(v.n):'';
+   fields.total.value=v.ok?`EUR ${v.n*180} (cleaning included; tourist tax if applicable extra)`:'';
+   if(v.ok){const status=window.__collectionStaySelection?.ready?labels.ready:labels.unverified;
+     note.textContent=`${a} → ${b} · ${v.n} nights · ${guests.value} guests · €${v.n*180} ${labels.total}. ${status}`;
+   }else note.textContent=v.msg;
+   // Always permit clicking to show an actionable explanation; never silently grey out.
+   if(!sending)send.disabled=false;
+   return v;
+ }
+ let syncingFromCalendar=false,sending=false;
+ document.addEventListener('collection:stay-selection',()=>{
+   if(syncingFromCalendar)return;
+   const s=window.__collectionStaySelection;
+   // Calendar selection takes precedence only when user clicks a calendar date.
+   if(!s)return;
+   if(s.start){startInput.value=s.start;endInput.value=s.end||'';}
+   else if(!startInput.value&&!endInput.value){startInput.value='';endInput.value='';}
+   refresh();
+ });
+ for(const el of [startInput,endInput])el.addEventListener('change',()=>{
+   syncingFromCalendar=true;
+   try{if(typeof window.collectionStaySetDates==='function')window.collectionStaySetDates(startInput.value,endInput.value);}
+   finally{syncingFromCalendar=false;}
+   refresh();
+ });
+ guests.addEventListener('change',refresh);
+ form.addEventListener('submit',async e=>{
+   e.preventDefault(); if(sending)return;
+   const v=refresh();
+   if(!v.ok){show(v.msg,true);(startInput.value?endInput:startInput).focus();return;}
+   if(!form.reportValidity())return;
+   sending=true;send.disabled=true;send.textContent=labels.sending;
+   show(labels.sending);
+   try{
+     const response=await fetch('https://formsubmit.co/ajax/hello@collectiondemaman.com',{method:'POST',headers:{Accept:'application/json'},body:new FormData(form)});
+     const result=await response.json().catch(()=>({}));
+     if(!response.ok||result.success!==true&&result.success!=='true')throw new Error(result.message||'Email delivery not confirmed');
+     show(labels.success);send.textContent='✓';
+   }catch(err){
+     show(labels.fail,true);
+     const link=document.createElement('a');link.href='mailto:hello@collectiondemaman.com?subject='+encodeURIComponent('Paris stay request')+'&body='+encodeURIComponent(`Name: ${form.elements.namedItem('name').value}\nEmail: ${form.elements.namedItem('email').value}\nCheck-in: ${startInput.value}\nCheck-out: ${endInput.value}\nGuests: ${guests.value}\n${form.elements.namedItem('Message').value}`);link.textContent=labels.email;feedback.appendChild(link);
+     send.textContent='Send stay request by email';send.disabled=false;
+   }finally{sending=false;}
+ });
+ // Initialize before the fetch returns so the date form remains usable during sync delays.
+ refresh();
 })();
 </script>
 <footer class="stay-foot"><a href="/en/">Collection de Maman</a>· 빈티지 &amp; 앤티크 · 파리에서 머물기</footer></body></html>
