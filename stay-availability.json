@@ -2,10 +2,6 @@
   "calendarValid": true,
   "blocked": [
     {
-      "start": "2026-11-19",
-      "end": "2026-11-24"
-    },
-    {
       "start": "2026-11-28",
       "end": "2026-11-29"
     },
@@ -34,6 +30,6 @@
       "end": "2027-05-28"
     }
   ],
-  "eventCount": 8,
-  "refreshedAt": "2026-11-25T20:41:34Z"
+  "eventCount": 7,
+  "refreshedAt": "2026-11-26T03:08:05Z"
 }
