@@ -7,6 +7,21 @@
       "statusCode": 301
     },
     {
+      "source": "/en/stay-paris.html",
+      "destination": "https://stay.collectiondemaman.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ja/stay-paris.html",
+      "destination": "https://stay.collectiondemaman.com/ja/",
+      "statusCode": 301
+    },
+    {
+      "source": "/ko/stay-paris.html",
+      "destination": "https://stay.collectiondemaman.com/ko/",
+      "statusCode": 301
+    },
+    {
       "source": "/en/p/1000394361646.html",
       "destination": "/en/sold.html#item-1000394361646",
       "statusCode": 302
